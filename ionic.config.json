@@ -1,0 +1,7 @@
+{
+  "name": "pocket_easy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
