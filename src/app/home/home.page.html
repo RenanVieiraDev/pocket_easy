@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header [translucent]="true" >
+  <ion-toolbar color="null">
     <ion-title>
-      Blank
+      <span id="logoTopo">Pocket easy</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,120 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Pocketeasy</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div id="telaPrimaria">
+    <div id="painelValoresInfo">
+      <ion-grid  style="margin: 0px;">
+        <ion-row style="margin: 0px;">
+          <ion-col>
+            <span style="margin-left: 10px;">R$</span>
+            <b id="salarioInfo">0,00</b>
+      
+            <span style="margin-left: 10px;">R$</span>
+            <b style="margin-left: 5px;color: red;">0,00</b>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <span style="margin-left: auto;">R$</span>
+            <b style="margin-left: 5px;color: red;">0,00</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div id="telaDespesasAtuais">
+
+      <div class="cardProd" >
+        <table style="width: 100%;">
+          <tr style="text-align: center;">
+            <td class="tituloCardGastos" >Data</td>
+            <td class="tituloCardGastos" >O'que</td>
+            <td class="tituloCardGastos" >Onde</td>
+            <td class="tituloCardGastos" >Quanto</td>
+            <td class="tituloCardGastos" >Como</td>
+          </tr>
+          <tr style="color: black;">
+            <td style="padding: 5px;">24/09/20</td>
+            <td style="padding: 5px;">Lanche</td>
+            <td style="padding: 5px;">Pizzaria</td>
+            <td style="padding: 5px;">23,50</td>
+            <td style="padding: 5px;">Dinheiro</td>
+          </tr>
+        </table>
+        <div style="width: 100%;text-align: right;">
+          <ion-button color="primary" size="small" >Ver</ion-button>
+          <ion-button color="tertiary" size="small" >EDIT</ion-button>
+          <ion-button color="danger" size="small">DEL</ion-button>
+        </div>
+      </div>
+
+    </div>
+
   </div>
+
+  <footer id="rodapeMenu">
+    <div style="width: 100%;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10" style="text-align: center;color: white;" *ngIf="mostraFormDespesa">
+            <h3 style="margin: 0px;">Adicionar Despesa</h3>
+          </ion-col>
+          <ion-col style="text-align: right;color: forestgreen;font-size: 38px;">
+            <ion-icon name="add-circle" (click)="mostraFormAddGasto()" *ngIf="mostraFormDespesa === false"></ion-icon>
+            <ion-icon name="chevron-down-circle" (click)="escondeFormAddGsto()" *ngIf="mostraFormDespesa"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <form *ngIf="mostraFormDespesa" [formGroup]="dadosDivida" (submit)="salvarDivida()">
+
+      <ion-item>
+        <label>Data da compra:</label>
+        <select formControlName="dadosDia" class="inputSelectData">
+          <option *ngFor="let dia of dias" value="{{dia}}">{{dia}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="mes">{{mes}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="ano">{{ano}}</option>
+        </select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">O'que ?</ion-label>
+        <ion-input formControlName="oque" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Onde ?</ion-label>
+        <ion-input formControlName="onde" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Quanto ? R$</ion-label>
+        <ion-input formControlName="quanto" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Como ?</ion-label>
+        <ion-input formControlName="como" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <label>Informe o tipo:</label>
+        <select formControlName="categoria" class="inputSelectData" style="width: 50%;margin-left: auto;margin-right: auto;">
+          <option>Alimentação</option>
+          <option>Transporte</option>
+          <option>Lazer</option>
+          <option>Saude</option>
+          <option>Beleza</option>
+          <option>Imprevistos</option>
+          <option>Menssais</option>
+        </select>
+      </ion-item>
+      <div style="width: 100%;text-align: center;">
+        <img *ngIf="loadingSalvar" src="../../assets/Blocks-1s-200px.svg" style="width: 50px;">
+        <ion-button *ngIf="loadingSalvar === false" type="submit" color="success" size="small">Salvar</ion-button>
+      </div>
+    </form>
+   </footer>
+ 
 </ion-content>

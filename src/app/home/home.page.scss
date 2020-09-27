@@ -1,27 +1,115 @@
-#container {
+ion-title{
+  color: black;
+}
+ion-toolbar{
+  background-color: rgb(122,176,221);
+ 
+}
+#logoTopo{
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color: #ffffff;
+}
+#telaPrimaria{
+  height: 100%;
+  background-color: rgba(0,0,0,.1);
+  padding-top: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+#painelValoresInfo{
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 3px solid rgba(54,203,36);
+}
+#salarioInfo{
+  margin-left: 5px;
+  color: #0088d7;
+  font-family: 'Roboto:500', sans-serif;
+}
+#telaDespesasAtuais{
+  padding: 5px;
+  max-height: 80%;
+  padding-bottom: 25px;
+  overflow-y: auto;
+}
+
+.btnMenuTopoNoSelected{
   text-align: center;
+  color: white;
+  border-bottom: 1px solid rgba(225,225,225,.1);
+  margin: 0px;
+  cursor: pointer;
+}
 
+.btnMenuTopoSelectedSelectedLeft{
+  text-align: center;
+  color:#031dba;
+  border-right:1px solid rgba(225,225,225,.1);
+  background-color: rgba(255,255,255,.1);
+  border-radius: 0px 5px 0px 0px;
+  margin: 0px;
+}
+
+.btnMenuTopoSelectedSelectedRight{
+  text-align: center;
+  color:#031dba;
+  border-left:1px solid rgba(225,225,225,.1);
+  background-color: rgba(255,255,255,.1);
+  border-radius: 5px 0px 0px 0px;
+  margin: 0px;
+}
+
+.telaFuncoes{
+  height: 100%;
+  background-color: rgba(255,255,255,.1);
+  padding: 10px;
+  max-height: 80%;
+  padding-bottom: 70px;
+  overflow-y: auto;
+}
+
+ion-list{background: none;}
+ion-item{
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 8px;
+  background-image: linear-gradient( to right,rgba(225,225,225,.8),rgba(225,225,225,.4),rgba(255,255,225,.1));
+}
+#loading{
+ text-align: center;
+}
+#loading img{
+  width: 100px;
+}
+.cardProd{
+  margin-bottom: 5px;
+  box-shadow: 2px 2px 0px rgba(255,255,255,.2);
+  border-radius: 5px;
+  background-color: rgba(122,176,221,.6);
+  /*background-image: linear-gradient( to right, rgb(255,255,255),  rgba(122,176,221,.6), rgba(122,176,221,.3)); */
+}
+.tituloCardGastos{
+  padding: 5px;
+  background-color: rgba(0,108,207,.8);
+  color: white;
+}
+/*font-family: 'Fredoka One', cursive;
+font-family: 'Roboto', sans-serif;
+*/
+
+#rodapeMenu{
+  width: 100%;
+  padding: 1px 1px 8px 1px;
+  background-color: rgb(122,176,221);
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 0px;
+  border-top: 2px solid rgba(0,0,0,.5);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.imagemBtnMenu{
+  width: 38px;
 }
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.inputSelectData{
+  margin: 5px;
 }
