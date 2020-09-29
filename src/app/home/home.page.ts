@@ -152,7 +152,6 @@ export class HomePage implements OnInit {
       if(todasAsDividasEmAguardo.length > 0){
         setTimeout(()=>{this.verificaDadosSalvosOfflineParaSalvarEmNuvem();},1000)
       }else{
-        console.log('removendo dados do localstorage...')
         localStorage.removeItem('despesasAguardandoConexao');
       }
     })
@@ -189,9 +188,6 @@ export class HomePage implements OnInit {
       this.loadingItens = false;
     }
   }
-
-  public DividaZoon(divida):void{
-    console.log(divida);
-  }
-
+  public DividaZoon(divida):void{this.verDividaZoon = divida;}
+  public escondeDividaZoon():void{this.verDividaZoon = null}
 }
