@@ -113,3 +113,13 @@ font-family: 'Roboto', sans-serif;
 .inputSelectData{
   margin: 5px;
 }
+#alertIconONOFF{
+  top: 3px;
+  right:5px;
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  border-radius: 5px;
+}
+.logoAlertOn{background-color: greenyellow;}
+.logoAlertOff{background-color: red;}

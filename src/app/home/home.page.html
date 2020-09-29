@@ -3,6 +3,11 @@
     <ion-title>
       <span id="logoTopo">Pocket easy</span>
     </ion-title>
+    <div id="alertIconONOFF" [class]="alertaIconOnOff">
+
+    </div>
+    <!-- <span *ngIf="conectadoAInternet" style="color:green">oNLINE</span>
+    <span *ngIf="conectadoAInternet === false" style="color:red">Offline</span>-->
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +18,7 @@
     </ion-toolbar>
   </ion-header>
   <div id="telaPrimaria">
-    <span *ngIf="conectadoAInternet" style="color:green">oNLINE</span>
-    <span *ngIf="conectadoAInternet === false" style="color:red">Offline</span>
+   
     <div id="painelValoresInfo">
       <ion-grid  style="margin: 0px;">
         <ion-row style="margin: 0px;">

@@ -28,6 +28,7 @@ export class HomePage implements OnInit {
     'categoria':new FormControl(null),
   })
   public conectadoAInternet:boolean;
+  public alertaIconOnOff:string;
 
   constructor(
     public divida:DividaService,
@@ -70,6 +71,7 @@ export class HomePage implements OnInit {
     this.divida.testaDados(this.dadosDivida.value)
     .then((res)=>{
       if(this.conectadoAInternet){
+       
         this.divida.salvaDespesa(this.dadosDivida.value)
         .then(ok=>{
             this.salvaDadosOffline(this.dadosDivida.value);
@@ -130,7 +132,6 @@ export class HomePage implements OnInit {
       despesasNoAguardo = JSON.parse(localStorage.getItem('despesasAguardandoConexao'));
      for(let key in despesasNoAguardo){
       this.salvaItemDespesaAguardada(despesasNoAguardo[key],key);
-      console.log('iniciando salvamento de dados...');
       break;
      }
     }
@@ -152,6 +153,13 @@ export class HomePage implements OnInit {
     .catch(err=>{});
   }
 
-  public verificaEstadoDeConexao():void{this.conectadoAInternet = navigator.onLine;}
+  public verificaEstadoDeConexao():void{
+    this.conectadoAInternet = navigator.onLine;
+    if(this.conectadoAInternet){
+      this.alertaIconOnOff = 'logoAlertOn';
+    }else{
+      this.alertaIconOnOff = 'logoAlertOff';
+    }
+  }
 
 }
