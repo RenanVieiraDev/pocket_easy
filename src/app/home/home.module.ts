@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { Network } from '@ionic-native/network/ngx';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { DividaService } from '../shared/divida.service';
@@ -16,11 +16,12 @@ import { DividaService } from '../shared/divida.service';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [HomePage],
   providers: [
-    DividaService
+    DividaService,
+    Network
   ]
 })
 export class HomePageModule {}
