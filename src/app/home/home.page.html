@@ -1,13 +1,18 @@
 <ion-header [translucent]="true" >
   <ion-toolbar color="null">
-    <ion-title>
-      <span id="logoTopo">Pocket easy</span>
-    </ion-title>
-    <div id="alertIconONOFF" [class]="alertaIconOnOff">
-
-    </div>
-    <!-- <span *ngIf="conectadoAInternet" style="color:green">oNLINE</span>
-    <span *ngIf="conectadoAInternet === false" style="color:red">Offline</span>-->
+    <ion-grid>
+      <ion-row>
+        <ion-col style="padding-top: 10px;">
+          <ion-title>
+            <span id="logoTopo">Pocket easy</span>
+          </ion-title>
+        </ion-col>
+        <ion-col style="text-align: right;padding-top: 19px;">
+          <ion-icon style="margin-left: auto;" name="ellipsis-vertical-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div id="alertIconONOFF" [class]="alertaIconOnOff"></div>
   </ion-toolbar>
 </ion-header>
 
