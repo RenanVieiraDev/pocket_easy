@@ -78,7 +78,7 @@ export class DividaService {
   };
 
   public validaQuanto(dados):string{
-    if(dados !== null)dados = parseInt(dados)
+    if(dados !== null)dados = parseFloat(dados)
     if(dados === null)return 'Por favor, Informa o valor da divida!';
     if(dados <= 0)return 'valor da compra está incorreto!';
     return'ok'
@@ -115,6 +115,12 @@ export class DividaService {
       .catch(err=>{
         reject(err)
       })
+    });
+  }
+
+  public apagaDivida(path,idUser,idDivida):Promise<any>{
+    return new Promise<any>((resolve,reject)=>{
+      this.crud.deletaValorNoDb(`${path}/${idUser}/${idDivida}`).then(ok=>{resolve('ok')}).catch(err=>{reject(err)});
     });
   }
 

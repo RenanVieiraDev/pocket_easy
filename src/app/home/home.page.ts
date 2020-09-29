@@ -62,7 +62,9 @@ export class HomePage implements OnInit {
   async startInitializationCalcs(){
     await this.verificaEstadoDeConexao();
     setInterval(()=>{this.verificaEstadoDeConexao();},3500);
-    await this.pegaListaDividas();
+    if(localStorage.getItem('dividasExcluirEmAguardo')){
+      this.verificaDadosSalvosOfflineParaExcluirEmNuvem()
+    }else{await this.pegaListaDividas();}
     await this.pegaDataAtual();
     await this.verificaDadosSalvosOfflineParaSalvarEmNuvem();
   }
@@ -143,6 +145,33 @@ export class HomePage implements OnInit {
     }
   }
 
+  public verificaDadosSalvosOfflineParaExcluirEmNuvem():void{
+    let despesasNoAguardo:Array<Object> = [];
+    if(localStorage.getItem('dividasExcluirEmAguardo')){
+      despesasNoAguardo = JSON.parse(localStorage.getItem('dividasExcluirEmAguardo'));
+     for(let key in despesasNoAguardo){
+      this.excluiItemDespesaAguardada(despesasNoAguardo[key],key);
+      break;
+     }
+    }
+  }
+
+  public excluiItemDespesaAguardada(dados,indiceDivida):void{
+    let todasAsDividasEmAguardo:Array<object> = [];
+     todasAsDividasEmAguardo = JSON.parse(localStorage.getItem('dividasExcluirEmAguardo'));
+    this.divida.apagaDivida('dividas',localStorage.getItem('UID'),dados.id_divida).then(ok=>{
+      todasAsDividasEmAguardo.splice(indiceDivida,1);
+      localStorage.setItem('dividasExcluirEmAguardo',JSON.stringify(todasAsDividasEmAguardo));
+      if(todasAsDividasEmAguardo.length > 0){
+        setTimeout(()=>{this.verificaDadosSalvosOfflineParaExcluirEmNuvem();},500)
+      }else{
+        localStorage.removeItem('dividasExcluirEmAguardo');
+        this.pegaListaDividas();
+      }
+    })
+    .catch(err=>{});
+  }
+
   public salvaItemDespesaAguardada(dados,indiceDivida):void{
     let todasAsDividasEmAguardo:Array<object> = [];
      todasAsDividasEmAguardo = JSON.parse(localStorage.getItem('despesasAguardandoConexao'));
@@ -158,6 +187,28 @@ export class HomePage implements OnInit {
     .catch(err=>{});
   }
 
+  public salvaItensParaExcluirEmAguardo(divida):void{
+    let todasAsDividasExcluirEmAguardo:Array<object> = [];
+    if(localStorage.getItem('dividasExcluirEmAguardo')){
+      todasAsDividasExcluirEmAguardo = JSON.parse(localStorage.getItem('dividasExcluirEmAguardo'));     
+    }
+    todasAsDividasExcluirEmAguardo.push(divida);
+    localStorage.setItem('dividasExcluirEmAguardo',JSON.stringify(todasAsDividasExcluirEmAguardo));
+  }
+
+  public excluiItensInLocalOff(divida):void{
+    let dividasEmLocalOff:Array<object> = [];
+    if(localStorage.getItem('dividasExcluirEmAguardo')){
+      dividasEmLocalOff = JSON.parse(localStorage.getItem('localOff'));
+    }
+    for(let key in dividasEmLocalOff){
+     if(dividasEmLocalOff[key]['id_divida'] === divida.id_divida){
+      dividasEmLocalOff.splice(parseInt(key),1);
+     }
+    }
+    localStorage.setItem('localOff',JSON.stringify(dividasEmLocalOff));
+  }
+
   public verificaEstadoDeConexao():void{
     this.conectadoAInternet = navigator.onLine;
     if(this.conectadoAInternet){
@@ -169,6 +220,7 @@ export class HomePage implements OnInit {
 
   public pegaListaDividas():void{
     this.listaDeDividas = [];
+    this.loadingItens = true;
     if(this.conectadoAInternet){
       this.divida.pegaListaDeDividas(`dividas/${localStorage.getItem('UID')}/`)
       .then(res=>{
@@ -188,6 +240,39 @@ export class HomePage implements OnInit {
       this.loadingItens = false;
     }
   }
+
+  async presentAlertConfirmDelDivida(divida) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Deletar?',
+      message: `Você deseja realmente deletar esse lançamento?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {}
+        }, {
+          text: 'Apagar',
+          handler: () => {
+            this.deletarDivida(divida);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
   public DividaZoon(divida):void{this.verDividaZoon = divida;}
   public escondeDividaZoon():void{this.verDividaZoon = null}
+  public deletarDivida(divida):void{
+    if(this.conectadoAInternet){
+      this.divida.apagaDivida('dividas',localStorage.getItem('UID'),divida.id_divida).then(res=>{this.pegaListaDividas()}).catch(err=>{this.presentAlert('OPS!','ERRO',err)});
+    }else{
+      this.salvaItensParaExcluirEmAguardo(divida);
+      this.excluiItensInLocalOff(divida);
+      this.pegaListaDividas();
+    }
+  }
 }
