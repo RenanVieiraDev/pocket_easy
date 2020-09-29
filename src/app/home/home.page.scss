@@ -31,7 +31,7 @@ ion-toolbar{
 #telaDespesasAtuais{
   padding: 5px;
   max-height: 80%;
-  padding-bottom: 25px;
+  padding-bottom: 40px;
   overflow-y: auto;
 }
 
@@ -123,3 +123,14 @@ font-family: 'Roboto', sans-serif;
 }
 .logoAlertOn{background-color: greenyellow;}
 .logoAlertOff{background-color: red;}
+#popupVerDivida{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: #0088d7;
+}
+.escondePopupVerDivida{
+  display: none;
+}

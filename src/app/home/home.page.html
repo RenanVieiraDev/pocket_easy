@@ -43,8 +43,11 @@
     </div>
 
     <div id="telaDespesasAtuais">
-
-      <div class="cardProd" >
+      <div style="width: 100%;text-align: center;" *ngIf="loadingItens">
+        <img src="../../assets/Blocks-1s-200px.svg">
+      </div>
+        
+      <div class="cardProd" *ngFor="let item of listaDeDividas">
         <table style="width: 100%;">
           <tr style="text-align: center;">
             <td class="tituloCardGastos" >Data</td>
@@ -54,19 +57,24 @@
             <td class="tituloCardGastos" >Como</td>
           </tr>
           <tr style="color: black;">
-            <td style="padding: 5px;">24/09/20</td>
-            <td style="padding: 5px;">Lanche</td>
-            <td style="padding: 5px;">Pizzaria</td>
-            <td style="padding: 5px;">23,50</td>
-            <td style="padding: 5px;">Dinheiro</td>
+            <td style="padding: 5px;">
+              <small>{{item.dadosDia}}/{{item.mes}}/{{item.ano}}</small>
+            </td>
+            <td style="padding: 5px;">{{(item.oque).substr(0,3)}}<span *ngIf="(item.oque).length >= 4">...</span></td>
+            <td style="padding: 5px;">{{(item.onde).substr(0,3)}}<span *ngIf="(item.onde).length >= 4">...</span></td>
+            <td style="padding: 5px;">{{item.quanto | currency:'BRL':true}}</td>
+            <td style="padding: 5px;">{{(item.como).substr(0,3)}}<span *ngIf="(item.como).length >= 4">...</span></td>
           </tr>
         </table>
         <div style="width: 100%;text-align: right;">
-          <ion-button color="primary" size="small" >Ver</ion-button>
+          <ion-button color="primary" size="small" (click)="DividaZoon(item)">Ver</ion-button>
           <ion-button color="tertiary" size="small" >EDIT</ion-button>
           <ion-button color="danger" size="small">DEL</ion-button>
         </div>
       </div>
+
+
+      <div id="popupVerDivida" class="escondePopupVerDivida"></div>
 
     </div>
 

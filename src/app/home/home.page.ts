@@ -29,6 +29,9 @@ export class HomePage implements OnInit {
   })
   public conectadoAInternet:boolean;
   public alertaIconOnOff:string;
+  public listaDeDividas:Array<object> = [];
+  public loadingItens:boolean = true;
+  public verDividaZoon:Object;
 
   constructor(
     public divida:DividaService,
@@ -59,6 +62,7 @@ export class HomePage implements OnInit {
   async startInitializationCalcs(){
     await this.verificaEstadoDeConexao();
     setInterval(()=>{this.verificaEstadoDeConexao();},3500);
+    await this.pegaListaDividas();
     await this.pegaDataAtual();
     await this.verificaDadosSalvosOfflineParaSalvarEmNuvem();
   }
@@ -80,8 +84,10 @@ export class HomePage implements OnInit {
             this.dadosDivida.reset();    
         })
         .catch(err=>{this.salvaDadosofflineDividaEmEspra();});
+        this.pegaListaDividas();
       }else{
         this.salvaDadosofflineDividaEmEspra();
+        this.pegaListaDividas();
       }
     })
     .catch(err=>{
@@ -160,6 +166,32 @@ export class HomePage implements OnInit {
     }else{
       this.alertaIconOnOff = 'logoAlertOff';
     }
+  }
+
+  public pegaListaDividas():void{
+    this.listaDeDividas = [];
+    if(this.conectadoAInternet){
+      this.divida.pegaListaDeDividas(`dividas/${localStorage.getItem('UID')}/`)
+      .then(res=>{
+        for(let key1 in res){
+          res[key1].id_divida = key1;
+          this.listaDeDividas.push(res[key1]);
+        }
+        localStorage.setItem('localOff',JSON.stringify(this.listaDeDividas))
+        this.loadingItens = false;
+      })
+      .catch(err=>{
+        this.presentAlert('OPS!','ERRO',err)
+        this.loadingItens = false;
+      })
+    }else{
+      if(localStorage.getItem('localOff')){this.listaDeDividas = JSON.parse(localStorage.getItem('localOff'))}
+      this.loadingItens = false;
+    }
+  }
+
+  public DividaZoon(divida):void{
+    console.log(divida);
   }
 
 }

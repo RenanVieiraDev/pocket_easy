@@ -101,9 +101,20 @@ export class DividaService {
 
   public salvaDespesa(dadosDivida):Promise<any>{
     return new Promise<any>((resolve,reject)=>{
-      this.crud.acrescentaValorNoDb(`dividas/${dadosDivida.uidUser}/${dadosDivida.categoria}/`,dadosDivida)
+      this.crud.acrescentaValorNoDb(`dividas/${dadosDivida.uidUser}/`,dadosDivida)
       .then(res=>{resolve(res)})
       .catch(err=>{reject(err)})
+    });
+  }
+
+  public pegaListaDeDividas(path):Promise<any>{
+    return new Promise<any>((resolve,reject)=>{
+      this.crud.pegaValorNoDb(path).then(res=>{
+        resolve(res)
+      })
+      .catch(err=>{
+        reject(err)
+      })
     });
   }
 
