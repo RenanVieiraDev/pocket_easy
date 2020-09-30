@@ -124,4 +124,25 @@ export class DividaService {
     });
   }
 
+  public geraIdDividaOffline(listaDividas):string{
+    const totalDeLetrasParaComporOId:number = 6;
+    const letrasAlfabeticas:Array<string> = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    let juncaoDeLetras='';
+    const numeroJuncao = (new Date().getTime() / 1000) * Math.random();
+    let indiceLetraUser;
+    for(let x= 0;x<totalDeLetrasParaComporOId;x++){
+      indiceLetraUser = Math.ceil(Math.random() * (25 - 0) + 0);
+      juncaoDeLetras += letrasAlfabeticas[indiceLetraUser]
+    }
+    let idOfflie = juncaoDeLetras+numeroJuncao;
+    for(let key in listaDividas){
+      if(listaDividas[key].idOfflie){
+        if(listaDividas[key].idOfflie === idOfflie){
+            this.geraIdDividaOffline(listaDividas);
+        }
+      }
+    }
+    return idOfflie;
+  }
+
 }

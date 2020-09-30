@@ -62,9 +62,11 @@ export class HomePage implements OnInit {
   async startInitializationCalcs(){
     await this.verificaEstadoDeConexao();
     setInterval(()=>{this.verificaEstadoDeConexao();},3500);
-    if(localStorage.getItem('dividasExcluirEmAguardo')){
+    if(localStorage.getItem('dividasExcluirEmAguardo') && this.conectadoAInternet){
       this.verificaDadosSalvosOfflineParaExcluirEmNuvem()
-    }else{await this.pegaListaDividas();}
+    }else{
+      await this.pegaListaDividas();
+    }
     await this.pegaDataAtual();
     await this.verificaDadosSalvosOfflineParaSalvarEmNuvem();
   }
@@ -99,6 +101,7 @@ export class HomePage implements OnInit {
   }
 
   public salvaDadosofflineDividaEmEspra():void{
+    this.dadosDivida.value.idOffline = this.divida.geraIdDividaOffline(this.listaDeDividas);
     let despesasNoLocalStore:Array<object> = [];
     if(localStorage.getItem('despesasAguardandoConexao')){
       despesasNoLocalStore = JSON.parse(localStorage.getItem('despesasAguardandoConexao'));
@@ -130,7 +133,9 @@ export class HomePage implements OnInit {
     if(localStorage.getItem('localOff')){
       dadosOff = JSON.parse(localStorage.getItem('localOff'));
       dadosOff.push(dados);  
-    }else{dadosOff.push(dados);}
+    }else{
+      dadosOff.push(dados);
+    }
     localStorage.setItem('localOff',JSON.stringify(dadosOff));
   }
 
@@ -171,6 +176,7 @@ export class HomePage implements OnInit {
     })
     .catch(err=>{});
   }
+  
 
   public salvaItemDespesaAguardada(dados,indiceDivida):void{
     let todasAsDividasEmAguardo:Array<object> = [];
@@ -188,25 +194,54 @@ export class HomePage implements OnInit {
   }
 
   public salvaItensParaExcluirEmAguardo(divida):void{
-    let todasAsDividasExcluirEmAguardo:Array<object> = [];
-    if(localStorage.getItem('dividasExcluirEmAguardo')){
-      todasAsDividasExcluirEmAguardo = JSON.parse(localStorage.getItem('dividasExcluirEmAguardo'));     
+    if(divida.id_divida){
+      let todasAsDividasExcluirEmAguardo:Array<object> = [];
+      if(localStorage.getItem('dividasExcluirEmAguardo')){
+        todasAsDividasExcluirEmAguardo = JSON.parse(localStorage.getItem('dividasExcluirEmAguardo'));     
+      }
+      todasAsDividasExcluirEmAguardo.push(divida);
+      localStorage.setItem('dividasExcluirEmAguardo',JSON.stringify(todasAsDividasExcluirEmAguardo));
     }
-    todasAsDividasExcluirEmAguardo.push(divida);
-    localStorage.setItem('dividasExcluirEmAguardo',JSON.stringify(todasAsDividasExcluirEmAguardo));
   }
 
   public excluiItensInLocalOff(divida):void{
     let dividasEmLocalOff:Array<object> = [];
-    if(localStorage.getItem('dividasExcluirEmAguardo')){
+    if(localStorage.getItem('localOff')){
       dividasEmLocalOff = JSON.parse(localStorage.getItem('localOff'));
     }
     for(let key in dividasEmLocalOff){
-     if(dividasEmLocalOff[key]['id_divida'] === divida.id_divida){
-      dividasEmLocalOff.splice(parseInt(key),1);
-     }
+      if(divida.id_divida){
+        console.log('aki id_divida');
+        if(dividasEmLocalOff[key]['id_divida'] === divida.id_divida){dividasEmLocalOff.splice(parseInt(key),1);}
+      }else{
+        console.log('aki idOffline');
+        if(dividasEmLocalOff[key]['idOffline'] === divida.idOffline){dividasEmLocalOff.splice(parseInt(key),1);}
+      }
     }
-    localStorage.setItem('localOff',JSON.stringify(dividasEmLocalOff));
+    if(dividasEmLocalOff.length === 0){
+      localStorage.removeItem('localOff');
+    }else{
+      localStorage.setItem('localOff',JSON.stringify(dividasEmLocalOff));
+    }
+    
+  }
+
+  public excluiItensInDividasEmAguardo(divida):void{
+    let dividasEmLocalAguardo:Array<object> = [];
+    if(localStorage.getItem('despesasAguardandoConexao')){
+      dividasEmLocalAguardo = JSON.parse(localStorage.getItem('despesasAguardandoConexao'));
+    }
+    for(let key in dividasEmLocalAguardo){
+      if(dividasEmLocalAguardo[key]['idOffline'] === divida.idOffline){
+        dividasEmLocalAguardo.splice(parseInt(key),1);
+      }
+    }
+    if(dividasEmLocalAguardo.length === 0){
+      localStorage.removeItem('despesasAguardandoConexao');
+    }else{
+      localStorage.setItem('despesasAguardandoConexao',JSON.stringify(dividasEmLocalAguardo));
+    }
+      
   }
 
   public verificaEstadoDeConexao():void{
@@ -272,6 +307,7 @@ export class HomePage implements OnInit {
     }else{
       this.salvaItensParaExcluirEmAguardo(divida);
       this.excluiItensInLocalOff(divida);
+      this.excluiItensInDividasEmAguardo(divida);
       this.pegaListaDividas();
     }
   }
