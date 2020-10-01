@@ -24,19 +24,19 @@
   </ion-header>
   <div id="telaPrimaria">
    
+  
+
     <div id="painelValoresInfo">
+      
       <ion-grid  style="margin: 0px;">
         <ion-row style="margin: 0px;">
-          <ion-col>
-            <span style="margin-left: 10px;">R$</span>
-            <b id="salarioInfo">0,00</b>
-      
-            <span style="margin-left: 10px;">R$</span>
-            <b style="margin-left: 5px;color: red;">0,00</b>
+          <ion-col size="7">
+            <img src="./assets/icon/editLapis.png" (click)="monstrarConfigValorSalario()" style="width: 20px;">
+            <b id="salarioInfo">{{salarioMes | currency:'BRL':true}}</b> |
+            <b style="margin-left: 5px;color: red;">{{totalDividas | currency:'BRL':true}}</b>
           </ion-col>
-          <ion-col style="text-align: right;">
-            <span style="margin-left: auto;">R$</span>
-            <b style="margin-left: 5px;color: red;">0,00</b>
+          <ion-col style="text-align: right;padding-top: 10px;">
+            <b style="margin-left: 5px;color: rgb(128, 119, 0);border-bottom: 1px solid greenyellow;">{{restoSalario | currency:'BRL':true}}</b>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -94,9 +94,36 @@
         </div> 
       </div>
 
+      <div id="menuConfSalario" class="esconde">
+        <div style="width: 100%;text-align: right;padding-right: 15px;padding-top: 10px;">
+          <img (click)="escondeConfigValorSalario()" src="./assets/icon/close.png" style="width: 25px;">
+        </div>
+          <div style="width: 100%;">
+            <table id="listaMapaFinanceiro">
+              <tr style="display: inline;">
+                <td style="padding: 5px;"><div id="rectSalario"></div></td>
+                <td>Salario |</td>
+              </tr>
+              <tr style="display: inline;">
+                <td style="padding: 5px;"><div id="rectDespesas"></div></td>
+                <td>Divida |</td>
+              </tr>
+              <tr style="display: inline;">
+                <td style="padding: 5px;"><div id="rectTotalResto"></div></td>
+                <td> Salario Restante </td>
+              </tr>
+            </table>
+            <ul style="list-style: none;margin-left: auto;margin-right: auto;">
+              <li>Salario: <span style="color: green;"><b>{{salarioMes | currency:'BRL':true}}</b></span></li>
+              <li>Valor Total Divida: <span style="color: red;"><b>{{totalDividas | currency:'BRL':true}}</b></span></li>
+              <li>Valor resto salario: <span style="color: rgb(128, 119, 0);"><b>{{restoSalario | currency:'BRL':true}}</b></span> </li>
+            </ul>
+          </div>
+        <app-config-salario></app-config-salario>
+      </div>
     </div>
-
   </div>
+  
 
   <footer id="rodapeMenu">
     <div style="width: 100%;">

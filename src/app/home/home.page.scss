@@ -20,12 +20,12 @@ ion-toolbar{
   margin-bottom: 5px;
   background-color: #ffffff;
   width: 100%;
-  padding: 10px;
+  padding: 2px;
   border-bottom: 3px solid rgba(54,203,36);
 }
 #salarioInfo{
   margin-left: 5px;
-  color: #0088d7;
+  color: green;
   font-family: 'Roboto:500', sans-serif;
 }
 #telaDespesasAtuais{
@@ -135,3 +135,33 @@ font-family: 'Roboto', sans-serif;
 .escondePopupVerDivida{
   display: none;
 }
+
+#menuConfSalario{
+  padding-top: 50px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: #ffffff;
+}
+
+#rectSalario{
+  width: 10px;
+  height: 10px;
+  background-color: green;
+}
+#rectDespesas{
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+#rectTotalResto{
+  width: 10px;
+  height: 10px;
+  background-color: rgb(128, 119, 0);
+}
+#listaMapaFinanceiro{
+  margin: 10px auto 10px auto;
+}
+.esconde{display: none;}

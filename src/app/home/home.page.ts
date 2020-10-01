@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
 
 import { DividaService } from '../shared/divida.service';
+import { ConfigService } from '../shared/config.service'
 
 @Component({
   selector: 'app-home',
@@ -32,14 +33,25 @@ export class HomePage implements OnInit {
   public listaDeDividas:Array<object> = [];
   public loadingItens:boolean = true;
   public verDividaZoon:Object;
+  public salarioMes:any = 0;
+  public totalDividas:any = 0;
+  public restoSalario:any = 0;
 
   constructor(
     public divida:DividaService,
     public alertController: AlertController,
-    private network: Network
+    private network: Network,
+    public config:ConfigService
   ) {}
   
-  ngOnInit(){this.startInitializationCalcs();}
+  ngOnInit(){
+    this.config.mudaSalario.subscribe(async res=>{
+     this.salarioMes = res;
+     await this.calculaValorTotalDividas();
+     await this.calculaValorRestoSalarioInDividas();
+    });
+    this.startInitializationCalcs();
+  }
   //metodos
   public mostraFormAddGasto():void{this.mostraFormDespesa = true;}
   public escondeFormAddGsto():void{this.mostraFormDespesa = false;}
@@ -63,7 +75,7 @@ export class HomePage implements OnInit {
     await this.verificaEstadoDeConexao();
     setInterval(()=>{this.verificaEstadoDeConexao();},3500);
     if(localStorage.getItem('dividasExcluirEmAguardo') && this.conectadoAInternet){
-      this.verificaDadosSalvosOfflineParaExcluirEmNuvem()
+     await this.verificaDadosSalvosOfflineParaExcluirEmNuvem();
     }else{
       await this.pegaListaDividas();
     }
@@ -265,6 +277,10 @@ export class HomePage implements OnInit {
         }
         localStorage.setItem('localOff',JSON.stringify(this.listaDeDividas))
         this.loadingItens = false;
+        this.pegaValorSalario().then(res=>{
+          this.calculaValorTotalDividas();
+          this.calculaValorRestoSalarioInDividas();
+        }).catch((err)=>{})
       })
       .catch(err=>{
         this.presentAlert('OPS!','ERRO',err)
@@ -273,6 +289,10 @@ export class HomePage implements OnInit {
     }else{
       if(localStorage.getItem('localOff')){this.listaDeDividas = JSON.parse(localStorage.getItem('localOff'))}
       this.loadingItens = false;
+      this.pegaValorSalario().then(res=>{
+        this.calculaValorTotalDividas();
+        this.calculaValorRestoSalarioInDividas();
+      }).catch((err)=>{})
     }
   }
 
@@ -310,5 +330,47 @@ export class HomePage implements OnInit {
       this.excluiItensInDividasEmAguardo(divida);
       this.pegaListaDividas();
     }
+  }
+
+  public monstrarConfigValorSalario():void{
+    document.querySelector('#menuConfSalario').className = ''
+  }
+  public escondeConfigValorSalario():void{
+    document.querySelector('#menuConfSalario').className = 'esconde'
+  }
+
+  public calculaValorTotalDividas():void{
+    let valor = 0;
+    for(let key in this.listaDeDividas){valor += this.listaDeDividas[key]['quanto'];}
+    this.totalDividas = valor;
+  }
+
+  public calculaValorRestoSalarioInDividas():void{
+    let valorDividasTot = 0;
+    for(let key in this.listaDeDividas){valorDividasTot += this.listaDeDividas[key]['quanto'];}
+    this.restoSalario = this.salarioMes - valorDividasTot;
+  }
+
+  public pegaValorSalario():Promise<any>{
+    return new Promise((resolve,reject)=>{
+      if(this.conectadoAInternet){
+        this.config.pegaSalarioInDB(`salario/${localStorage.getItem('UID')}`)
+        .then(res=>{
+          this.salarioMes = res
+          resolve(res);
+        })
+        .catch(err=>{
+          console.log(err)
+          reject(err)
+        })
+      }else{
+        if(localStorage.getItem('salario')){
+          this.salarioMes = parseFloat(localStorage.getItem('salario'));
+          resolve(this.salarioMes);
+        }else{
+          reject('error')
+        }
+      }
+    });
   }
 }

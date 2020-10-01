@@ -8,7 +8,7 @@ import { Network } from '@ionic-native/network/ngx';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { DividaService } from '../shared/divida.service';
-
+import { ConfigSalarioComponent } from './config-salario/config-salario.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { DividaService } from '../shared/divida.service';
     HomePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage],
+  declarations: [HomePage,ConfigSalarioComponent],
   providers: [
     DividaService,
     Network

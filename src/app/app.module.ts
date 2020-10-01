@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DividaService } from './shared/divida.service';
 import { CrudService  } from './shared/crud.service';
+import { ConfigService  } from './shared/config.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { CrudService  } from './shared/crud.service';
     SplashScreen,
     DividaService,
     CrudService,
+    ConfigService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
