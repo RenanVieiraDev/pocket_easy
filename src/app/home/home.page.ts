@@ -1,8 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { Network } from '@ionic-native/network/ngx';
-
 import { DividaService } from '../shared/divida.service';
 import { ConfigService } from '../shared/config.service'
 
@@ -40,7 +38,6 @@ export class HomePage implements OnInit {
   constructor(
     public divida:DividaService,
     public alertController: AlertController,
-    private network: Network,
     public config:ConfigService
   ) {}
   
@@ -259,9 +256,9 @@ export class HomePage implements OnInit {
   public verificaEstadoDeConexao():void{
     this.conectadoAInternet = navigator.onLine;
     if(this.conectadoAInternet){
-      this.alertaIconOnOff = 'logoAlertOn';
+      this.config.sistemaOnOff('logoAlertOn');
     }else{
-      this.alertaIconOnOff = 'logoAlertOff';
+      this.config.sistemaOnOff('logoAlertOff');
     }
   }
 

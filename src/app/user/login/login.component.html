@@ -1,0 +1,35 @@
+<div id="telaCadastro">
+  <div style="text-align: center;margin-bottom: 50px;">
+    <h1 id="logoFont">Pocket easy</h1>
+    <img src="../../../assets/logo/logoPocketPorquinho.png" style="width: 35px;">
+  </div>
+  <!--<div style="width: 100%;text-align: center;padding: 5px;">
+    <ion-button color="light" size="small">
+      <ion-icon name="logo-google" style="color:#DB4437;margin-right: 3px;"></ion-icon>  Google
+    </ion-button> 
+    <ion-button size="small" color="light">
+      <ion-icon name="logo-facebook" style="color:#3b5998;margin-right: 3px;"></ion-icon> Facebook
+    </ion-button>
+  </div>-->
+  <form [formGroup]="dadosUser" (submit)="fazerLogin()" style="width: 80%;margin-left: auto;margin-right: auto;">
+
+    <ion-item color="null">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item color="null">
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input formControlName="senha" type="password" ></ion-input>
+    </ion-item>
+
+    <div style="width: 100%;text-align: center;">
+       <ion-button type="submit" *ngIf="loadingEntrar === false">Entrar</ion-button>
+       <img *ngIf="loadingEntrar" src="../../../assets/Blocks-1s-200px.svg" style="margin-left: auto;margin-right: auto;width: 100px;">
+    </div>
+  </form>
+<div style="width: 100%;padding: 10px;margin-top: 50px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+  Se preferir <a routerLink="/cadastro" style="color:#fff"><b>cadastre-se</b></a> <hr/>
+</div>
+</div>
+

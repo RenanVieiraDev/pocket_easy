@@ -1,0 +1,38 @@
+<div id="telaCadastro">
+  <div style="text-align: center;">
+    <h1 id="logoFont">Pocket easy</h1>
+    <img src="../../../assets/logo/logoPocketPorquinho.png" style="width: 35px;">
+  </div>
+  <form [formGroup]="dadosUser" (submit)="validaDados()" style="width: 80%;margin-left: auto;margin-right: auto;">
+    
+    <ion-item color="null"> 
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input  formControlName="Nome" ></ion-input>
+    </ion-item>
+
+    <ion-item color="null">
+      <ion-label position="floating">Sobrenome</ion-label>
+      <ion-input formControlName="sobrenome"></ion-input>
+    </ion-item>
+
+    <ion-item color="null">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item color="null">
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" formControlName="senha"></ion-input>
+    </ion-item>
+
+    <ion-item color="null">
+      <ion-label position="floating">Confirme Senha</ion-label>
+      <ion-input type="password" formControlName="confSenha"></ion-input>
+    </ion-item>
+
+    <div style="width: 100%;text-align: center;">
+      <img *ngIf="loadingSalvarCadastro" src="../../../assets/Blocks-1s-200px.svg" style="width: 75px;">
+      <ion-button type="submit" *ngIf="loadingSalvarCadastro === false">Cadastrar</ion-button>
+    </div>
+  </form>
+</div>

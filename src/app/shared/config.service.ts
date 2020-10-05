@@ -6,6 +6,8 @@ import { CrudService } from './crud.service';
 })
 export class ConfigService {
   public mudaSalario = new EventEmitter();
+  public menuAtivo = new EventEmitter();
+  public onOff = new EventEmitter();
 
   constructor(public crud:CrudService) { }
 
@@ -26,5 +28,8 @@ export class ConfigService {
       this.crud.pegaValorNoDb(path).then(res=>{resolve(res)}).catch(err=>{reject(err)});
     });
   }
+
+  public mostrarMenu(valor:boolean):void{this.menuAtivo.emit(valor);}
+  public sistemaOnOff(valor:string):void{this.onOff.emit(valor);}
 
 }

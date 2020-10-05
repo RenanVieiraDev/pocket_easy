@@ -10,6 +10,11 @@ ion-toolbar{
   font-size: 22px;
   color: #ffffff;
 }
+#logoTopoMenu{
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color:  rgb(122,176,221);
+}
 #telaPrimaria{
   height: 100%;
   background-color: rgba(0,0,0,.1);
@@ -100,8 +105,8 @@ font-family: 'Roboto', sans-serif;
 
 #rodapeMenu{
   width: 100%;
-  padding: 1px 1px 8px 1px;
-  background-color: rgb(122,176,221);
+  padding: 1px 1px 3px 1px;
+  background-image:  linear-gradient( -0.2turn,  rgb(122,176,221), #00cf95 );
   position: absolute;
   bottom: 0px;
   border-top: 2px solid rgba(0,0,0,.5);
@@ -165,3 +170,22 @@ font-family: 'Roboto', sans-serif;
   margin: 10px auto 10px auto;
 }
 .esconde{display: none;}
+
+#filtroBackgroundMenuLateral{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+  background-color: rgba(0,0,0,.3);
+  padding: 0px;
+}
+#headerMenuLateral{
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  margin-bottom: 21px;
+}
+
+#menuConfigMenutopoDropdow{
+  background-color: #ffffff;
+}
+#menuConfigMenutopoDropdow ul{list-style: none;margin: 0px;}
+#menuConfigMenutopoDropdow li{padding: 7px;}

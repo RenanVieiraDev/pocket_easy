@@ -1,0 +1,54 @@
+<div id="filtroBackgroundMenuLateral" class="esconde" *ngIf="user !== null">
+  <ion-grid style="height: 100%;margin: 0px;padding: 0px;">
+    <ion-row style="height: 100%;margin: 0px;padding: 0px;">
+      <ion-col size="2" (click)="escondeMenuLateral()"></ion-col>
+      <ion-col id="menuConfigMenutopoDropdow">
+        <div id="headerMenuLateral">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" style="text-align: center;">
+                <ion-title>
+                  <span id="logoTopoMenu">Pocket easy</span>
+                </ion-title>
+              </ion-col>
+              <ion-col size="2">
+                  <img src="../../assets/icon/collaborator-male.png" style="width: 50px;height: 40px;border-radius: 100%;">
+              </ion-col>
+              <ion-col>
+                <p style="margin: 10px 0px 0px 0px;">
+                  {{user['Nome']}} {{user['sobrenome']}}
+                </p>
+                <small> {{user['email']}}</small>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+          <ul>
+            <li (click)="funcionalidadeEmContrucao()"><ion-icon name="notifications-outline"></ion-icon> Notificações</li>
+            <li><ion-icon name="bar-chart-outline"></ion-icon> Estatisticas</li>
+            <li (click)="funcionalidadeEmContrucao()"><ion-icon name="star-half-outline"></ion-icon> Market place</li>
+            <li (click)="funcionalidadeEmContrucao()"><ion-icon name="person-circle-outline"></ion-icon> Minha conta</li>
+            <li (click)="sair()"><ion-icon name="close-circle-outline" ></ion-icon> Sair</li>
+          </ul>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<ion-header [translucent]="true" *ngIf="menuTopoAtivo">
+  <ion-toolbar color="null">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="padding-top: 10px;">
+          <ion-title>
+            <span id="logoTopo">Pocket easy</span>
+          </ion-title>
+        </ion-col>
+        <ion-col style="text-align: right;padding-top: 19px;">
+          <ion-icon (click)="mostraMenuLateral()" style="margin-left: auto;" name="ellipsis-vertical-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div id="alertIconONOFF" [class]="alertaIconOnOff"></div>
+  </ion-toolbar>
+</ion-header>

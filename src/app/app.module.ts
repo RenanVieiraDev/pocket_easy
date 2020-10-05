@@ -12,9 +12,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { DividaService } from './shared/divida.service';
 import { CrudService  } from './shared/crud.service';
 import { ConfigService  } from './shared/config.service';
+import { UserService } from './shared/user.service';
+import { CadastroNovoUserComponent } from './user/cadastro-novo-user/cadastro-novo-user.component';
+import { LoginComponent } from './user/login/login.component';
+import { TopoMenuComponent } from './topo-menu/topo-menu.component';
+import { AuthService } from './shared/auth.service';
+
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    CadastroNovoUserComponent,
+    LoginComponent,
+    TopoMenuComponent,
+  ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,ReactiveFormsModule],
   providers: [
@@ -23,6 +35,8 @@ import { ConfigService  } from './shared/config.service';
     DividaService,
     CrudService,
     ConfigService,
+    UserService,
+    AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

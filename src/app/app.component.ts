@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import * as firebase from 'firebase';
+import { ConfigService } from './shared/config.service';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +23,12 @@ export class AppComponent {
     appId: "1:518452779431:web:d8de25ed3c8ea0111e7e82",
     measurementId: "G-QV6Z1MQX7X"
   };
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public conf:ConfigService
   ) {
     firebase.initializeApp(this.firebaseConfig);
   }
