@@ -15,9 +15,9 @@ export class AuthService implements CanActivate {
     ) { }
   
   async canActivate(){
-    this.conf.mostrarMenu(true);
-    return true
-    //return await this.checkLogin();
+    //this.conf.mostrarMenu(true);
+    //return true
+    return await this.checkLogin();
   }
 
   public checkLogin():Promise<boolean>{

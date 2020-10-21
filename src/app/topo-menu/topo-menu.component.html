@@ -8,7 +8,7 @@
             <ion-row>
               <ion-col size="12" style="text-align: center;">
                 <ion-title>
-                  <span id="logoTopoMenu">Pocket easy</span>
+                  <span id="logoTopoMenu" >Finanças Smart</span>
                 </ion-title>
               </ion-col>
               <ion-col size="2">
@@ -25,7 +25,8 @@
         </div>
           <ul>
             <li (click)="funcionalidadeEmContrucao()"><ion-icon name="notifications-outline"></ion-icon> Notificações</li>
-            <li><ion-icon name="bar-chart-outline"></ion-icon> Estatisticas</li>
+            <li (click)="goDashuser()"><ion-icon name="bar-chart-outline"></ion-icon> Estatisticas</li>
+            <li (click)="goConfCat()"><ion-icon name="construct-outline"></ion-icon> Config App</li>
             <li (click)="funcionalidadeEmContrucao()"><ion-icon name="star-half-outline"></ion-icon> Market place</li>
             <li (click)="funcionalidadeEmContrucao()"><ion-icon name="person-circle-outline"></ion-icon> Minha conta</li>
             <li (click)="sair()"><ion-icon name="close-circle-outline" ></ion-icon> Sair</li>
@@ -41,7 +42,7 @@
       <ion-row>
         <ion-col style="padding-top: 10px;">
           <ion-title>
-            <span id="logoTopo">Pocket easy</span>
+            <span (click)="goHome()" id="logoTopo">Finanças Smart</span>
           </ion-title>
         </ion-col>
         <ion-col style="text-align: right;padding-top: 19px;">

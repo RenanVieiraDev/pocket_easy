@@ -1,8 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DividaService } from '../shared/divida.service';
-import { ConfigService } from '../shared/config.service'
+import { ConfigService } from '../shared/config.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-home',
@@ -38,18 +40,50 @@ export class HomePage implements OnInit {
   constructor(
     public divida:DividaService,
     public alertController: AlertController,
-    public config:ConfigService
-  ) {}
-  
-  ngOnInit(){
-    this.config.mudaSalario.subscribe(async res=>{
-     this.salarioMes = res;
-     await this.calculaValorTotalDividas();
-     await this.calculaValorRestoSalarioInDividas();
-    });
-    this.startInitializationCalcs();
+    public config:ConfigService,
+    public user:UserService,
+    public manipuladorDeRotas:Router
+  ) {
+    
   }
+
+ async ngOnInit(){
+    await this.verificaEstadoDeConexao();
+    this.config.appAutorizedInitTutorial.subscribe(res=>{this.startInitializationCalcs();});
+    if(!localStorage.getItem('noPristineApp') && this.conectadoAInternet){
+      this.testaPristineDoApp()
+      .then(res=>{
+        this.config.mudaSalario.subscribe(async res=>{
+          this.salarioMes = res;
+          await this.calculaValorTotalDividas();
+          await this.calculaValorRestoSalarioInDividas();
+         });
+         this.startInitializationCalcs();
+      })
+      .catch(err=>{
+        this.manipuladorDeRotas.navigate(['/ajustesUserConfig'])
+      })
+    }else{
+      this.config.mudaSalario.subscribe(async res=>{
+        this.salarioMes = res;
+        await this.calculaValorTotalDividas();
+        await this.calculaValorRestoSalarioInDividas();
+       });
+       this.startInitializationCalcs();
+    }
+  }
+
   //metodos
+  async testaPristineDoApp():Promise<any>{
+    return new Promise( async (resolve,reject)=>{
+      if(!localStorage.getItem('noPristineApp')){
+        await this.user.pegaConfApp(`configApp/${localStorage.getItem('UID')}`).then(res=>{if(res === null){reject(null)}})
+        await this.config.pegaSalarioInDB(`salario/${localStorage.getItem('UID')}/`).then(res=>{if(res === null){reject(null)}})
+      }
+      resolve('no pristine app true');
+    });
+  }
+
   public mostraFormAddGasto():void{this.mostraFormDespesa = true;}
   public escondeFormAddGsto():void{this.mostraFormDespesa = false;}
   public pegaDataAtual():void{

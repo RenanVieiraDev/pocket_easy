@@ -1,0 +1,43 @@
+<div id="telaCadastro">
+  <div style="text-align: center;margin-bottom: 50px;">
+    <h1 id="logoFont">Pocket easy</h1>
+    <img src="../../../assets/logo/logoPocketPorquinho.png" style="width: 35px;">
+  </div>
+
+  <form *ngIf="confirmacaoEnvioEmail === 0" [formGroup]="emailUser" (submit)="enviarEmail()" style="width: 80%;margin-left: auto;margin-right: auto;">
+    
+    <div style="margin-bottom: 20px;">
+      <p>
+        Insire seu email e logo lhe enviaremos a redefinição de senha.
+      </p>
+    </div>
+  
+    <ion-item color="null">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <div style="width: 100%;text-align: center;">
+      <ion-button color="danger" *ngIf="loadingEntrar === false" routerLink="/">
+        Voltar <ion-icon name="arrow-undo-outline"></ion-icon>
+      </ion-button>
+      <ion-button type="submit" *ngIf="loadingEntrar === false">
+        Enviar <ion-icon name="paper-plane-outline"></ion-icon>
+      </ion-button>
+      <img *ngIf="loadingEntrar" src="../../../assets/Blocks-1s-200px.svg" style="margin-left: auto;margin-right: auto;width: 100px;">
+    </div>
+  </form>
+
+  <div *ngIf="confirmacaoEnvioEmail === 1" style="text-align: center;">
+    <ion-icon name="mail-unread-outline" style="font-size: 75px;color: chartreuse;"></ion-icon>
+     <h3 style="color: white;">Enviado!</h3>
+     <span>{{confEmailView}}</span>
+     <p style="margin: 5px;color: white;">
+      O email de redefinição de senha foi enviado,
+      verifique sua caixa de entrada do seu email
+      e siga os passos para redefinir a senha.
+     </p>
+     <ion-button routerLink="/">OK</ion-button>
+  </div>
+
+</div>

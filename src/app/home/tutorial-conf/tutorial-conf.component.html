@@ -1,0 +1,258 @@
+<div id="telaTutorial">
+  <!--Tela 0-->
+  <div id="msgBoasVinda" *ngIf="tela === 0">
+    <div id="tituloApp">
+      <h2 id="logoTopo">Pocket easy</h2>
+    </div>
+    <b>Olá seja bem vindo</b><br>
+    <p>
+      Vamos começar a organizar sua vida
+      financeira,
+      mas primeiro me forneça algumas informações..
+      vamos lá, clique em proximo!
+    </p>
+    <div style="text-align: center;">
+      <img src="../../../assets/mascoteRobo.png">
+    </div>
+    <ion-button (click)="mudaTela(1)">Proximo</ion-button>
+  </div>
+  <!--FIM Tela 0-->
+
+  <!--Tela 1-->
+  <div id="tela1" *ngIf="tela === 1">
+    <p>
+      Primeiro vamos configurar suas prioridades de gastos.
+      Indique quais categorias que deve ser priorizada no seu dia a dia,
+      organize com as porcentagem as categorias que você julga
+      que seja da mais alta importancia (40%) ate a mais baixa
+      importancia (10%), julgue os criterios pela necessidade 
+      do seu dia a dia.
+    </p>
+    <form [formGroup]="dadosCat" (submit)="salvaHierarquiaCat()">
+
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Alimentação:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="alimentacao">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Transporte:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="transporte">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Lazer:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="lazer">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Saude:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="saude">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Beleza:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="beleza">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Imprevistos:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="imprevistos">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="width: 100;text-align: center;"> 
+        <img *ngIf="loadingSalvaDados" src="../../../assets/Blocks-1s-200px.svg" style="width: 90px;">
+        <ion-button color="danger" (click)="mudaTela(0)" *ngIf="loadingSalvaDados === false">Voltar</ion-button>
+        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Proximo</ion-button>
+      </div>
+    </form>
+   
+  </div>
+  <!--FIM Tela 1-->
+
+   <!--Tela 2-->
+   <div id="tela2" *ngIf="tela === 2">
+    <p>
+      Chegou a hora de informar qual é seu salario mensal.
+    </p>
+    
+    <form [formGroup]="dadosSalario" (submit)="salvarSalario()" style="width: 80%;margin-left: auto;margin-right: auto;">
+      <ion-item>
+        <ion-label position="floating">R$ salario</ion-label>
+        <ion-input formControlName="salario" type="number"></ion-input>
+      </ion-item>
+      
+      <div style="width: 100;text-align: center;"> 
+        <img *ngIf="loadingSalvaDados" src="../../../assets/Blocks-1s-200px.svg" style="width: 90px;">
+        <ion-button color="danger" (click)="mudaTela(1)" *ngIf="loadingSalvaDados === false">Voltar</ion-button>
+        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Proximo</ion-button>
+      </div>
+    </form>
+   
+  </div>
+  <!--FIM Tela 2-->
+
+  <!--Tela 3-->
+  <div id="tela2" *ngIf="tela === 3">
+
+    <div class="divMenuListaDividasEscondido" id="containerDivida">
+      <ion-icon (click)="escondeMenuDeListaDividas()" *ngIf="btnTrougleListMostrar" name="caret-back-circle-outline"></ion-icon>
+      <ion-icon (click)="mostraMenuDeListaDividas()" *ngIf="btnTrougleListMostrar === false" name="caret-forward-circle-outline"></ion-icon>
+      <ion-badge color="danger" style="margin-top: 0px;" *ngIf="listaDeDividas.length > 0"><small>
+        {{listaDeDividas.length}}
+      </small></ion-badge>
+      <div *ngIf="btnTrougleListMostrar">
+        <div class="cardProd" *ngFor="let item of listaDeDividas">
+          <table style="width: 100%;">
+            <tr style="text-align: center;">
+              <td class="tituloCardGastos" >Data</td>
+              <td class="tituloCardGastos" >O'que</td>
+              <td class="tituloCardGastos" >Quanto</td>
+            </tr>
+            <tr style="color: black;">
+              <td style="padding: 5px;"><small>{{item.dadosDia}}/{{item.mes}}/{{item.ano}}</small></td>
+              <td style="padding: 5px;">{{item.oque}}</td>
+              <td style="padding: 5px;">{{item.quanto | currency:'BRL':true}}</td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="!listaDeDividas[0]" style="width: 100%;text-align: center;font-size: 18px;">
+          <p >
+            Ainda não ah dividas salvas!
+          </p>
+        </div>
+        
+      </div>
+    </div>
+
+    <p>
+      Ok,ate agora tudo certo!<br/>
+      Para finalizar, adicione todas as suas contas fixas menssais,
+      por exemplo, agua,luz,aluguel,bolato financiamento..
+      Vamos lá!!
+    </p>
+    
+    <form [formGroup]="dadosDivida" (submit)="salvarDivida()">
+
+      <ion-item>
+        <label>Data de vencimento</label>
+        <select formControlName="dadosDia" class="inputSelectData">
+          <option *ngFor="let dia of dias" value="{{dia}}">{{dia}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="mes">{{mes}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="ano">{{ano}}</option>
+        </select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">O'que ?</ion-label>
+        <ion-input formControlName="oque" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Onde ?</ion-label>
+        <ion-input formControlName="onde" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Quanto ? R$</ion-label>
+        <ion-input formControlName="quanto" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Como ?</ion-label>
+        <ion-input formControlName="como" ></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <div style="margin-right: 5px;">
+          Categoria:
+        </div>
+        <input type="text" formControlName="categoria" disabled placeholder="Fixo" value="fixo" >
+      </ion-item>
+
+      <div style="width: 100;text-align: center;"> 
+        <img *ngIf="loadingSalvaDados" src="../../../assets/Blocks-1s-200px.svg" style="width: 90px;">
+        <ion-button color="danger" (click)="mudaTela(1)" *ngIf="loadingSalvaDados === false">Voltar</ion-button>
+        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Salvar</ion-button>
+        <div>
+          <ion-button (click)="finalizarConfgApp()" color="success">Finalizar</ion-button>
+        </div>
+      </div>
+    </form>
+      
+     
+    
+   
+  </div>
+  <!--FIM Tela 3-->
+
+</div>

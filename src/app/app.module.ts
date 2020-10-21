@@ -17,6 +17,11 @@ import { CadastroNovoUserComponent } from './user/cadastro-novo-user/cadastro-no
 import { LoginComponent } from './user/login/login.component';
 import { TopoMenuComponent } from './topo-menu/topo-menu.component';
 import { AuthService } from './shared/auth.service';
+import { DashuserComponent } from './home/dashuser/dashuser.component';
+import { ConfHirarquiaCatComponent } from './home/conf-hirarquia-cat/conf-hirarquia-cat.component';
+import { TutorialConfComponent } from './home/tutorial-conf/tutorial-conf.component';
+import { SenhaResetComponent } from './user/senha-reset/senha-reset.component';
+
 
 
 
@@ -26,6 +31,10 @@ import { AuthService } from './shared/auth.service';
     CadastroNovoUserComponent,
     LoginComponent,
     TopoMenuComponent,
+    DashuserComponent,
+    ConfHirarquiaCatComponent,
+    TutorialConfComponent,
+    SenhaResetComponent
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,ReactiveFormsModule],

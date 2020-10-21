@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "pocket_easy",
+  "appId": "br.com.sllim.pocketeasy",
+  "appName": "pocket easy",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

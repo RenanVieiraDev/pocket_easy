@@ -1,0 +1,111 @@
+<div id="telaPrimaria">
+  <div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;">
+    <h4>Limites de orçamento</h4>
+  </div>
+  
+  <div id="containerForm">
+    <form [formGroup]="dadosCat" (submit)="salvaHierarquiaCat()">
+
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Alimentação:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="alimentacao">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Transporte:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="transporte">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Lazer:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="lazer">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Saude:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="saude">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Beleza:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="beleza">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-grid class="cardOpcao">
+        <ion-row>
+          <ion-col style="text-align: right;">
+            Imprevistos:
+          </ion-col>
+          <ion-col style="padding-left: 2px;">
+            <select formControlName="imprevistos">
+              <option value="40" selected>40%</option>
+              <option value="30">30%</option>
+              <option value="20">20%</option>
+              <option value="10">10%</option>
+            </select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="width: 100;text-align: center;"> 
+        <img *ngIf="loadingSalvaDados" src="../../../assets/Blocks-1s-200px.svg" style="width: 90px;">
+        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Salvar</ion-button>
+      </div>
+    </form>
+  </div>
+ 
+</div>

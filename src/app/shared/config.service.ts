@@ -8,6 +8,7 @@ export class ConfigService {
   public mudaSalario = new EventEmitter();
   public menuAtivo = new EventEmitter();
   public onOff = new EventEmitter();
+  public appAutorizedInitTutorial = new EventEmitter();
 
   constructor(public crud:CrudService) { }
 
@@ -31,5 +32,6 @@ export class ConfigService {
 
   public mostrarMenu(valor:boolean):void{this.menuAtivo.emit(valor);}
   public sistemaOnOff(valor:string):void{this.onOff.emit(valor);}
+  public autorizacaoInitAppTotor():void{this.appAutorizedInitTutorial.emit(true)}
 
 }

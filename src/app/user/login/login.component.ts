@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 import { AuthService } from '../../shared/auth.service';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit {
               public alertController: AlertController
     ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public fazerLogin():void{
     this.loadingEntrar = true;
@@ -41,7 +40,10 @@ export class LoginComponent implements OnInit {
         this.dadosUser.reset();
       }
     })
-    .catch(err=>{console.log(err)})
+    .catch(err=>{
+      this.presentAlertError('OPS!','erro no login',err);
+      this.loadingEntrar = false;
+    })
   }
 
   async presentAlertError(titulo,subTitulo,msg) {

@@ -75,6 +75,7 @@ export class UserService {
   public salvaNovoCadastro(dados):Promise<any>{
     return new Promise((resolve,reject)=>{
         this.crud.cadastraLoginEmailSenha(dados.email,dados.senha).then(res=>{
+          firebase.auth().currentUser.sendEmailVerification();
           resolve(res);
         })
         .catch(err=>{
@@ -86,7 +87,9 @@ export class UserService {
   public salvaDadosDoUserInDB(dados):Promise<any>{
     return new Promise((resolve,reject)=>{
       this.crud.acrescentaValorNoDb(`usuarios/${dados.uid}/`,dados)
-      .then(res=>{resolve(res)})
+      .then(res=>{
+        resolve(res)
+      })
       .catch(err=>{reject(err)})
     })
   }
@@ -125,11 +128,34 @@ export class UserService {
             localStorage.removeItem('localOff');
             localStorage.removeItem('firebase:host:levataxi.firebaseio.com');
             localStorage.removeItem('OTelJS.ClientId');
+            localStorage.removeItem('noPristineApp');
             resolve('ok')
         })
         .catch(err=>{
           reject(err);
         })
+    });
+  }
+
+  public salvaConfigHierarquiaCategoriaDoUser(path,valor):Promise<any>{
+      return new Promise((resolve,reject)=>{
+        this.crud.insereValorNoDb(path,valor).then(res=>{resolve(res)})
+        .catch(err=>{reject(err)});
+      })
+  }
+
+  public pegaConfApp(path):Promise<any>{
+    return new Promise((resolve,reject)=>{
+      this.crud.pegaValorNoDb(path).then(res=>{resolve(res)})
+      .catch(err=>{reject(err)});
+    });
+  }
+
+  public enviarEmailParaRedefinirSenha(email):Promise<any>{
+    return new Promise((resolve,reject)=>{
+      firebase.auth().sendPasswordResetEmail(email)
+      .then(res=>{resolve(res)})
+      .catch(err=>{reject(err)})
     });
   }
 

@@ -1,0 +1,51 @@
+<div id="talaDashBoard">
+
+  <!--Modulo para cards de categorias que mostra total de R$ para cada categoria-->
+  <div id="moduloValoresCardCategoria">
+    <h4>Categorias valores total</h4>
+    <ion-grid>
+      <ion-row style="text-align: center;">
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false">
+            <img src="../../../assets/Blocks-1s-200px.svg">
+        </ion-col>
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true">
+          <p style="color: red;">
+            OPS!! não ah dados para mostrar estatisticas de seus boletos!
+          </p>
+        </ion-col>
+
+        <ion-col *ngFor="let cat of categoriasValoresTotal" class="cardCategoria" size="5">
+           <p style="margin: 0px;padding: 0px;"><small>{{cat.categoria}}</small></p>
+           <span>{{cat.valorTotal | currency:'BRL':true}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!--Modulo de apresentação da porcentagem total de cada categoria-->
+  <div id="moduloValoresPorcentoCategorias">
+    <h4>Limites de gastos</h4>
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false">
+          <img src="../../../assets/Blocks-1s-200px.svg">
+      </ion-col>
+      <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true">
+        <p style="color: red;">
+          OPS!! não ah dados para mostrar estatisticas de seus boletos!
+        </p>
+      </ion-col>
+    <!--Card de % de gastos-->
+      <div class="cardBarraPorcento {{item['alerta']}}" *ngFor="let item of categoriasMaximoValorGastoETotalGasto">
+        <ion-grid>
+          <ion-row>
+            <ion-col style="text-align: left;padding: 0px;"></ion-col>
+            <ion-col style="padding: 0px;">{{item['nomeCategoria']}}</ion-col>
+            <ion-col style="text-align: right;padding: 0px;">100%</ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-progress-bar color="primary" value="{{item['porcentoParaview']}}"></ion-progress-bar>
+      </div><!--FIM-->
+
+  </div>
+
+
+</div>
