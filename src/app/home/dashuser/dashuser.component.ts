@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DividaService } from '../../shared/divida.service';
 import { UserService } from '../../shared/user.service';
+import { ConfigService } from '../../shared/config.service';
 
 @Component({
   selector: 'app-dashuser',
@@ -13,13 +14,20 @@ export class DashuserComponent implements OnInit {
   public configPorcentoApp;
   public categoriasMaximoValorGastoETotalGasto:Array<object> = [];
   public naoADados:boolean = false;
+  public modoOffAtivo:boolean = false;
 
   constructor(
     public divida:DividaService,
-    public user:UserService
-  ) { 
-     this.pegaConfigPorcentoApp();
-     this.pegaDividasParaSepararPorCategoria();
+    public user:UserService,
+    public conf:ConfigService
+  ) {
+      if(this.conf.verificaDispositivoComConexaoAbertaInternet()){
+        this.pegaConfigPorcentoApp();
+        this.pegaDividasParaSepararPorCategoria();
+      }else{
+        this.modoOffAtivo = true;
+        console.log('dispositivo OFFline');
+      } 
   }
 
   async ngOnInit() {

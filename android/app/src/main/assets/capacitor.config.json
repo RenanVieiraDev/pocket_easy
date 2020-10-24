@@ -1,6 +1,6 @@
 {
-  "appId": "br.com.sllim.pocketeasy",
-  "appName": "pocket easy",
+  "appId": "br.com.sllim.financassmart",
+  "appName": "Finanças Smart",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

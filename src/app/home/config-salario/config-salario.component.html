@@ -7,6 +7,7 @@
     <ion-input formControlName="salario" type="number"></ion-input>
   </ion-item>
   <div style="text-align: center;padding-top: 15px;">
-    <ion-button color="success" type="submit">Salvar</ion-button>
+    <ion-button color="success" type="submit" *ngIf="loadingSlavar === false">Salvar</ion-button>
+    <img src="./assets/Blocks-1s-200px.svg" *ngIf="loadingSlavar" style="width: 90px;">
   </div>
 </form>

@@ -33,5 +33,6 @@ export class ConfigService {
   public mostrarMenu(valor:boolean):void{this.menuAtivo.emit(valor);}
   public sistemaOnOff(valor:string):void{this.onOff.emit(valor);}
   public autorizacaoInitAppTotor():void{this.appAutorizedInitTutorial.emit(true)}
+  public verificaDispositivoComConexaoAbertaInternet():boolean{return navigator.onLine;}
 
 }

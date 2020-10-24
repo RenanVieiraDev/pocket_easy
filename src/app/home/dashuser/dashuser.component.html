@@ -5,12 +5,17 @@
     <h4>Categorias valores total</h4>
     <ion-grid>
       <ion-row style="text-align: center;">
-        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false">
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === false">
             <img src="../../../assets/Blocks-1s-200px.svg">
         </ion-col>
-        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true">
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true && modoOffAtivo === false">
           <p style="color: red;">
             OPS!! não ah dados para mostrar estatisticas de seus boletos!
+          </p>
+        </ion-col>
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === true">
+          <p style="color: red;">
+            OPS!! Modo offline! Não podemos realizar a contagem dos dados! volte quando estiver online.
           </p>
         </ion-col>
 
@@ -25,12 +30,17 @@
   <!--Modulo de apresentação da porcentagem total de cada categoria-->
   <div id="moduloValoresPorcentoCategorias">
     <h4>Limites de gastos</h4>
-        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false">
+        <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === false">
           <img src="../../../assets/Blocks-1s-200px.svg">
       </ion-col>
-      <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true">
+      <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true && modoOffAtivo === false">
         <p style="color: red;">
           OPS!! não ah dados para mostrar estatisticas de seus boletos!
+        </p>
+      </ion-col>
+      <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === true">
+        <p style="color: red;">
+          OPS!! Modo offline! Não podemos realizar a contagem dos dados! volte quando estiver online.
         </p>
       </ion-col>
     <!--Card de % de gastos-->

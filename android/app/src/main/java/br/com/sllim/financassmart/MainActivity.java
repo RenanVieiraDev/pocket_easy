@@ -1,4 +1,4 @@
-package br.com.sllim.pocketeasy;
+package br.com.sllim.financassmart;
 
 import android.os.Bundle;
 

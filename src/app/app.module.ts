@@ -6,6 +6,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { Device } from '@ionic-native/device/ngx';
+
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +50,8 @@ import { SenhaResetComponent } from './user/senha-reset/senha-reset.component';
     ConfigService,
     UserService,
     AuthService,
+    ScreenOrientation,
+    Device,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
