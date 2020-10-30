@@ -126,7 +126,7 @@ export class HomePage implements OnInit {
         this.divida.salvaDespesa(this.dadosDivida.value)
         .then(ok=>{
             this.salvaDadosOffline(this.dadosDivida.value);
-            this.presentAlert('OK!','Salvo','Dados salvo com sucessu!');
+            this.presentAlert('OK!','Salvo','Dados salvo com sucesso!');
             this.loadingSalvar = false;
             this.dadosDivida.reset();    
         })
@@ -154,7 +154,7 @@ export class HomePage implements OnInit {
     }
     this.salvaDadosOffline(this.dadosDivida.value);
     localStorage.setItem('despesasAguardandoConexao',JSON.stringify(despesasNoLocalStore));
-    this.presentAlert('OK!','Salvo','Dados salvo com sucessu!');
+    this.presentAlert('OK!','Salvo','Dados salvo com sucesso!');
     this.loadingSalvar = false;
     this.dadosDivida.reset();
   }
