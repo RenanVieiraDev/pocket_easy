@@ -30,10 +30,7 @@ export class DashuserComponent implements OnInit {
       } 
   }
 
-  async ngOnInit() {
-    //await this.pegaConfigPorcentoApp();
-    //await this.pegaDividasParaSepararPorCategoria();
-  }
+  async ngOnInit() {}
 
   public pegaDividasParaSepararPorCategoria():void{
     this.divida.pegaListaDeDividas(`dividas/${localStorage.getItem('UID')}`)

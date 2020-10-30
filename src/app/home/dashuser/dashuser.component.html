@@ -2,7 +2,7 @@
 
   <!--Modulo para cards de categorias que mostra total de R$ para cada categoria-->
   <div id="moduloValoresCardCategoria">
-    <h4>Categorias valores total</h4>
+    <h4>Categorias valores totais</h4>
     <ion-grid>
       <ion-row style="text-align: center;">
         <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === false">
@@ -10,12 +10,12 @@
         </ion-col>
         <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true && modoOffAtivo === false">
           <p style="color: red;">
-            OPS!! não ah dados para mostrar estatisticas de seus boletos!
+            OPS! Não tem dados para mostrar estatísticas de seus boletos!
           </p>
         </ion-col>
         <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === true">
           <p style="color: red;">
-            OPS!! Modo offline! Não podemos realizar a contagem dos dados! volte quando estiver online.
+            OPS! Modo offline! Não podemos realizar a contagem dos dados! Volte quando estiver online.
           </p>
         </ion-col>
 
@@ -35,12 +35,12 @@
       </ion-col>
       <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === true && modoOffAtivo === false">
         <p style="color: red;">
-          OPS!! não ah dados para mostrar estatisticas de seus boletos!
+          OPS! Não tem dados para mostrar estatísticas de seus boletos!
         </p>
       </ion-col>
       <ion-col style="text-align: center;" *ngIf="!categoriasValoresTotal[0] && naoADados === false && modoOffAtivo === true">
         <p style="color: red;">
-          OPS!! Modo offline! Não podemos realizar a contagem dos dados! volte quando estiver online.
+          OPS! Modo offline! Não podemos realizar a contagem dos dados! Volte quando estiver online.
         </p>
       </ion-col>
     <!--Card de % de gastos-->
