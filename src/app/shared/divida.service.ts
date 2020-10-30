@@ -40,15 +40,15 @@ export class DividaService {
 
   public validaDia(dados):string{
     if(dados !== null)dados = parseInt(dados)
-    if(dados === null)return 'Por favor, Informa o dia da divida!';
-    if(dados <= 0)return 'valor referente ao dia está incorreto!';
+    if(dados === null)return 'Por favor, informa o dia da dívida!';
+    if(dados <= 0)return 'Valor referente ao dia está incorreto!';
     return'ok'
   };
 
   public validaMes(dados):string{
     if(dados !== null)dados = parseInt(dados)
-    if(dados === null)return 'Por favor, Informa o mês da divida!';
-    if(dados <= 0)return 'valor referente ao mês está incorreto!';
+    if(dados === null)return 'Por favor, informa o mês da dívida!';
+    if(dados <= 0)return 'Valor referente ao mês está incorreto!';
     return'ok'
   };
 
@@ -56,46 +56,46 @@ export class DividaService {
     const AnoAtual = new Date().getFullYear();
     if(dados !== null)dados = parseInt(dados);
     if(dados !== AnoAtual)return 'Ano informado está diferente do ano que estamos!';
-    if(dados === null)return 'Por favor, Informa o ano da divida!';
-    if(dados <= 0)return 'valor referente ao ano está incorreto!';
+    if(dados === null)return 'Por favor, informa o ano da dívida!';
+    if(dados <= 0)return 'Valor referente ao ano está incorreto!';
     return'ok'
   };
 
   public validaOque(dados):string{
     if(dados !== null)dados = dados.trim();
-    if(dados === null)return 'Por favor, Informa " O que foi comprado" da divida!';
-    if(dados === '')return 'Por favor, Informa " O que foi comprado" da divida!';
+    if(dados === null)return 'Por favor, informa ”O que foi comprado" da dívida!';
+    if(dados === '')return 'Por favor, informa ”O que foi comprado" da dívida!';
     if(dados.length < 3)return 'Valor "Oque" é invalido!';
     return'ok'
   };
 
   public validaOnde(dados):string{
     if(dados !== null)dados = dados.trim();
-    if(dados === null)return 'Por favor, Informa "Onde foi realizado" a divida!';
-    if(dados === '')return 'Por favor, Informa "Onde foi realizado" a divida!';
+    if(dados === null)return 'Por favor, informa "Onde foi realizado" a dívida!';
+    if(dados === '')return 'Por favor, informa "Onde foi realizado" a dívida!';
     if(dados.length < 3)return 'Valor "Onde" é invalido!';
     return'ok'
   };
 
   public validaQuanto(dados):string{
     if(dados !== null)dados = parseFloat(dados)
-    if(dados === null)return 'Por favor, Informa o valor da divida!';
-    if(dados <= 0)return 'valor da compra está incorreto!';
+    if(dados === null)return 'Por favor, informa o valor da dívida!';
+    if(dados <= 0)return 'Valor da compra está incorreto!';
     return'ok'
   };
 
   public validaComo(dados):string{
     if(dados !== null)dados = dados.trim();
-    if(dados === null)return 'Por favor, Informa "como foi realizado" o pagamento!';
-    if(dados === '')return 'Por favor, Informa "como foi realizado" o pagamento!';
+    if(dados === null)return 'Por favor, informa "como foi realizado" o pagamento!';
+    if(dados === '')return 'Por favor, informa "como foi realizado" o pagamento!';
     if(dados.length < 3)return 'Valor "Como" é invalido!';
     return'ok'
   };
 
   public validaCategoria(dados):string{
     if(dados !== null)dados = dados.trim();
-    if(dados === null)return 'Por favor, escolha uma categoria para a divida!';
-    if(dados === '')return 'Por favor, escolha uma categoria para a divida!';
+    if(dados === null)return 'Por favor, escolha uma categoria para a dívida!';
+    if(dados === '')return 'Por favor, escolha uma categoria para a dívida!';
     return'ok'
   };
 
