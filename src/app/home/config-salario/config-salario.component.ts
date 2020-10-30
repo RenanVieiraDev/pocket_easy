@@ -44,7 +44,7 @@ export class ConfigSalarioComponent implements OnInit {
     if(valor !== null)valor = parseFloat(valor);
     if(valor === null)return 'Valor invalido!';
     if(valor === '')return 'Valor invalido!';
-    if(valor <= 0)return 'O valor do salario deve ser maior que 0';
+    if(valor <= 0)return 'O valor do salário deve ser maior que 0';
     return 'ok';
   }
 
