@@ -58,7 +58,7 @@ export class TopoMenuComponent implements OnInit {
   }
 
   public funcionalidadeEmContrucao():void{
-    this.presentAlertFuncionalidadeEmContrucao('Desculpe','Em desenolvimento','Essa funcionalidade ainda está em faze de construção! desculpe pelo incoveniente, aguarde que logo logo estará pronta.')
+    this.presentAlertFuncionalidadeEmContrucao('Desculpe','Em desenvolvimento.','Essa funcionalidade ainda está em faze de construção! Desculpe pelo inconveniente, aguarde que logo estará pronto.')
   }
   
   public goDashuser():void{
