@@ -38,7 +38,7 @@ export class SenhaResetComponent implements OnInit {
       })
       .catch(err=>{
         this.loadingEntrar = false;
-        this.presentAlert('OPS!','Erro','Não há registro de usuário correspondente a este email.');
+        this.presentAlert('OPS!','Erro','Não há registro de usuário correspondente a este e-mail.');
       })
     }
   }
