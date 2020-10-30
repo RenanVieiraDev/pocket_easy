@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../shared/user.service';
 import { AuthService } from '../../shared/auth.service';
-import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.dadosUser.reset();
         this.manipuladorDeRotas.navigate(['/home']);
       }else{
-        this.presentAlertError('OPS!','Email não confirmado!','Por favor vá ate sua caixa de email e confirme a verificação da dua conta!');
+        this.presentAlertError('OPS!','E-mail não confirmado!','Por favor vá ate sua caixa de e-mail e confirme a verificação da dua conta!');
         this.loadingEntrar = false;
         this.dadosUser.reset();
       }
