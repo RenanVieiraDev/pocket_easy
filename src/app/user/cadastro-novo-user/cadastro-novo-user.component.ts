@@ -44,7 +44,7 @@ export class CadastroNovoUserComponent implements OnInit {
       this.user.salvaDadosDoUserInDB(dados).then(res=>{
         this.dadosUser.reset();
         this.loadingSalvarCadastro = false;
-        this.presentAlertConfirmGoLogin('Ok! seu cadastro foi realizado!', 'te enviamos um email para você confirmar, para poder acessar sua conta')
+        this.presentAlertConfirmGoLogin('Ok! Seu cadastro foi realizado!', 'Te enviamos um e-mail para você confirmar, para poder acessar sua conta.')
       }).catch(err=>{this.presentAlertError('OPS!','Erro ao salvar dados!',err)});
     }).catch(err=>{this.presentAlertError('OPS!','Erro ao realizar cadastro!',err)});
   }
