@@ -32,8 +32,8 @@ export class UserService {
   public confNome(nome):string{
     if(nome !== null){nome = nome.trim(nome);};
     if(nome !== null){nome = nome.replace(/\s/g,'');};
-    if(nome === null)return 'Você deve informa seu primeiro nome!';
-    if(nome === '')return 'Você deve informa seu primeiro nome!';
+    if(nome === null)return 'Você deve informar seu primeiro nome!';
+    if(nome === '')return 'Você deve informar seu primeiro nome!';
     if(nome.length < 2)return 'Nome muito curto, informa um nome valido!';
     this.dadosUser['Nome'] = nome;
     return 'ok';
@@ -42,9 +42,9 @@ export class UserService {
   public confSobrenome(sobrenome):string{
     if(sobrenome !== null)sobrenome = sobrenome.trim();
     if(sobrenome !== null){sobrenome = sobrenome.replace(/\s/g,'');};
-    if(sobrenome === null)return 'Você deve informa seu sobrenome!';
-    if(sobrenome === '')return 'Você deve informa seu sobrenome!';
-    if(sobrenome.length < 2)return 'sobrenome muito curto, informa um sobrenome valido!';
+    if(sobrenome === null)return 'Você deve informar seu sobrenome!';
+    if(sobrenome === '')return 'Você deve informar seu sobrenome!';
+    if(sobrenome.length < 2)return 'Sobrenome muito curto, informa um sobrenome valido!';
     this.dadosUser['sobrenome'] = sobrenome;
     return 'ok';
   }
@@ -62,11 +62,11 @@ export class UserService {
     if(senha !== null) senha = senha.trim();
     if(confSenha !== null) confSenha = confSenha.trim();
     if(senha === null) return 'Senha incorreta!';
-    if(confSenha === null) return 'confirmação de senha é incorreta!';
+    if(confSenha === null) return 'Confirmação de senha é incorreta!';
     if(senha === '') return 'Senha incorreta!';
-    if(confSenha === '') return 'confirmação de senha é incorreta!';
-    if(senha !== confSenha) return 'a senha deve ser identica a confimrção de senha!';
-    if(senha.length < 8) return 'a senha deve conter no minimo 8 caracteres';
+    if(confSenha === '') return 'Confirmação de senha é incorreta!';
+    if(senha !== confSenha) return 'A senha deve ser idêntica à confirmação de senha!';
+    if(senha.length < 8) return 'A senha deve conter no mínimo 8 caracteres.';
     this.dadosUser['senha'] = senha;
     this.dadosUser['confSenha'] = confSenha;
     return 'ok';
