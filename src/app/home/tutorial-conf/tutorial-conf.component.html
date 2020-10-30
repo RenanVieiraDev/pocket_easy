@@ -4,17 +4,17 @@
     <div id="tituloApp">
       <h2 id="logoTopo">Finanças Smart</h2>
     </div>
-    <b>Olá seja bem vindo</b><br>
+    <b>Olá seja bem-vindo!</b><br>
     <p>
       Vamos começar a organizar sua vida
       financeira,
-      mas primeiro me forneça algumas informações..
-      vamos lá, clique em proximo!
+      mas primeiro me forneça algumas informações.
+      Vamos lá, clique em próximo!
     </p>
     <div style="text-align: center;">
       <img src="../../../assets/mascoteRobo.png">
     </div>
-    <ion-button (click)="mudaTela(1)">Proximo</ion-button>
+    <ion-button (click)="mudaTela(1)">Próximo</ion-button>
   </div>
   <!--FIM Tela 0-->
 
@@ -23,10 +23,9 @@
     <p>
       Primeiro vamos configurar suas prioridades de gastos.
       Indique quais categorias que deve ser priorizada no seu dia a dia,
-      organize com as porcentagem as categorias que você julga
-      que seja da mais alta importancia (40%) ate a mais baixa
-      importancia (10%), julgue os criterios pela necessidade 
-      do seu dia a dia.
+      organize com as porcentagens que você julga
+      que seja da mais alta importância (40%) ate a mais baixa          
+      (10%), julgue os critérios pela necessidade do seu dia a dia.
     </p>
     <form [formGroup]="dadosCat" (submit)="salvaHierarquiaCat()">
 
@@ -81,7 +80,7 @@
       <ion-grid class="cardOpcao">
         <ion-row>
           <ion-col style="text-align: right;">
-            Saude:
+            Saúde:
           </ion-col>
           <ion-col style="padding-left: 2px;">
             <select formControlName="saude">
@@ -138,19 +137,19 @@
    <!--Tela 2-->
    <div id="tela2" *ngIf="tela === 2">
     <p>
-      Chegou a hora de informar qual é seu salario mensal.
+      Chegou a hora de informar qual é seu salário mensal.
     </p>
     
     <form [formGroup]="dadosSalario" (submit)="salvarSalario()" style="width: 80%;margin-left: auto;margin-right: auto;">
       <ion-item>
-        <ion-label position="floating">R$ salario</ion-label>
+        <ion-label position="floating">R$ salário</ion-label>
         <ion-input formControlName="salario" type="number"></ion-input>
       </ion-item>
       
       <div style="width: 100;text-align: center;"> 
         <img *ngIf="loadingSalvaDados" src="../../../assets/Blocks-1s-200px.svg" style="width: 90px;">
         <ion-button color="danger" (click)="mudaTela(1)" *ngIf="loadingSalvaDados === false">Voltar</ion-button>
-        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Proximo</ion-button>
+        <ion-button type="submit" *ngIf="loadingSalvaDados === false">Próximo</ion-button>
       </div>
     </form>
    
@@ -183,7 +182,7 @@
         </div>
         <div *ngIf="!listaDeDividas[0]" style="width: 100%;text-align: center;font-size: 18px;">
           <p >
-            Ainda não ah dividas salvas!
+            Ainda não tem dividas salvas!
           </p>
         </div>
         
@@ -191,10 +190,10 @@
     </div>
 
     <p>
-      Ok,ate agora tudo certo!<br/>
-      Para finalizar, adicione todas as suas contas fixas menssais,
-      por exemplo, agua,luz,aluguel,bolato financiamento..
-      Vamos lá!!
+      Ok, ate agora tudo certo!<br />
+      Para finalizar, adicione todas as suas contas fixas mensais,
+      por exemplo, água, luz, aluguel, boleto financiamento.
+      Vamos lá!
     </p>
     
     <form [formGroup]="dadosDivida" (submit)="salvarDivida()">

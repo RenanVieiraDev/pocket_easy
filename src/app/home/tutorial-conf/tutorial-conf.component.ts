@@ -70,7 +70,7 @@ export class TutorialConfComponent implements OnInit {
    })
    .catch(err=>{
     this.loadingSalvaDados=false;
-      this.presentAlert('OPS!!','Campos Vazios',`O campo ${err} é necessario para configurar o app!`)
+      this.presentAlert('OPS!!','Campos Vazios!',`O campo ${err} é necessário!`)
     })
   }
 
@@ -124,7 +124,7 @@ export class TutorialConfComponent implements OnInit {
     if(valor !== null)valor = parseFloat(valor);
     if(valor === null)return 'Valor invalido!';
     if(valor === '')return 'Valor invalido!';
-    if(valor <= 0)return 'O valor do salario deve ser maior que 0';
+    if(valor <= 0)return 'O valor do salário deve ser maior que 0.';
     return 'ok';
   }
 
@@ -154,12 +154,12 @@ public salvarDivida():void{
   .then((res)=>{
       this.divida.salvaDespesa(this.dadosDivida.value)
       .then(ok=>{
-          this.presentAlert('OK!','Salvo','Dados salvo com sucessu!');
+          this.presentAlert('OK!','Salvo','Dados salvo com sucesso!');
           this.dadosDivida.reset();
           this.pegaListaDividas();   
       })
       .catch(err=>{
-        this.presentAlert('OPS!','Não foi possivel salvar os dados!',err);
+        this.presentAlert('OPS!','Não foi possível salvar os dados!',err);
       });
   })
   .catch(err=>{
@@ -199,7 +199,7 @@ public finalizarConfgApp():void{
     this.confApp.autorizacaoInitAppTotor();
     this.manipuladorDeRotas.navigate(['/'])
   }else{
-    this.presentAlert('OPS!','Insira divida.','para terminar as configurações do seu app, inclua pelo menos uma divida fixa');
+    this.presentAlert('OPS!','Insira uma dívida.','Para terminar as configurações, inclua pelo menos uma dívida fixa!');
   }
 }
 
