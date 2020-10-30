@@ -31,7 +31,7 @@ export class ConfHirarquiaCatComponent implements OnInit {
    this.validaCampos().then(res=>{
      this.user.salvaConfigHierarquiaCategoriaDoUser(`configApp/${localStorage.getItem('UID')}/`,this.dadosCat.value)
      .then(res=>{
-       this.presentAlert('OK!','Salvo','Os dados foram salvos com sucessu!');
+       this.presentAlert('OK!','Salvo','Os dados foram salvos com sucesso!');
        this.loadingSalvaDados=false;
      })
      .catch(err=>{
@@ -41,7 +41,7 @@ export class ConfHirarquiaCatComponent implements OnInit {
    })
    .catch(err=>{
     this.loadingSalvaDados=false;
-      this.presentAlert('OPS!!','Campos Vazios',`O campo ${err} é necessario para configurar o app!`)
+      this.presentAlert('OPS!','Campos Vazios.',`O campo ${err} é necessário!`)
     })
   }
 
