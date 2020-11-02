@@ -1,5 +1,3 @@
-
-
 <ion-content [fullscreen]="true" >
   <div id="telaPrimaria" style="padding-top: 60px;">
    
@@ -54,23 +52,27 @@
 
 
       <div id="popupVerDivida" *ngIf="verDividaZoon">
-        <ion-grid>
-          <ion-row>
-            <ion-col><span>{{verDividaZoon['dadosDia']}}/{{verDividaZoon['mes']}}/{{verDividaZoon['mes']}}</span></ion-col>
-            <ion-col style="text-align: right;"><span>{{verDividaZoon['categoria']}}</span></ion-col>
-          </ion-row>
-        </ion-grid>
-        <div style="width: 100%;text-align: center;padding: 10px;margin-top: 35px;"> 
-          <h2>{{verDividaZoon['oque']}}</h2>
-          <h4>{{verDividaZoon['onde']}}</h4>
-          <h4>{{verDividaZoon['quanto'] | currency:'BRL':true}}</h4>
-          <p>
-            {{verDividaZoon['como']}}
-          </p>  
+        
+        <div id="cardDivida">
+          <ion-grid>
+            <ion-row>
+              <ion-col><span>{{verDividaZoon['dadosDia']}}/{{verDividaZoon['mes']}}/{{verDividaZoon['mes']}}</span></ion-col>
+              <ion-col style="text-align: right;"><span>{{verDividaZoon['categoria']}}</span></ion-col>
+            </ion-row>
+          </ion-grid>
+          <div style="width: 100%;text-align: center;padding: 10px;margin-top: 35px;"> 
+            <h2>{{verDividaZoon['oque']}}</h2>
+            <h4>{{verDividaZoon['onde']}}</h4>
+            <h4>{{verDividaZoon['quanto'] | currency:'BRL':true}}</h4>
+            <p>
+              {{verDividaZoon['como']}}
+            </p>  
+          </div>
+          <div style="margin: 15px;">
+            <ion-button (click)="escondeDividaZoon()" color="light" expand="block" style="margin-top: 15px;">OK</ion-button>
+          </div>
         </div>
-        <div style="margin: 15px;">
-          <ion-button (click)="escondeDividaZoon()" color="secondary" expand="block" style="margin-top: 15px;">OK</ion-button>
-        </div> 
+
       </div>
 
       <div id="menuConfSalario" class="esconde">
