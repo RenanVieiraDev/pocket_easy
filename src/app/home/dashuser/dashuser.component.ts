@@ -115,6 +115,7 @@ export class DashuserComponent implements OnInit {
         })
       }
     }
+    //console.log(this.categoriasMaximoValorGastoETotalGasto);
   }
 
   public mudaValorLetrasApresebtacao(valor):String{
