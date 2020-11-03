@@ -1,4 +1,53 @@
+<div id="zooDividaContainer" *ngIf="mostrarDividaEmZoon">
+  <div id="cardDividaZoo">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align: left;">
+          {{itenDividaEmZooAtual['dadosDia']}}/{{itenDividaEmZooAtual['mes']}}/{{itenDividaEmZooAtual['ano']}}
+        </ion-col>
+        <ion-col style="text-align: right;color: red;">
+          {{itenDividaEmZooAtual['categoria']}}
+        </ion-col>
+      </ion-row>
+      <div style="width: 100%;"> 
+        <table style="width: 100%;margin: 5px;">
+          <tr>
+            <td style="padding:10px;border-bottom: 1px solid rgba(0,0,0,.1);">
+              Oque:
+            </td>
+            <td style="color:#ffff;">
+              {{itenDividaEmZooAtual['oque']}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px;border-bottom: 1px solid rgba(0,0,0,.1);">Onde:</td>
+            <td style="color:#ffff;">
+              {{itenDividaEmZooAtual['onde']}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px;border-bottom: 1px solid rgba(0,0,0,.1);">Quanto:</td>
+            <td style="color:#ffff;">
+              {{itenDividaEmZooAtual['quanto'] | currency:'BRL':true}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px;border-bottom: 1px solid rgba(0,0,0,.1);">Como:</td>
+            <td style="color:#ffff;">
+              {{itenDividaEmZooAtual['como']}}
+            </td>
+          </tr>
+        </table>
+      </div>
+      <ion-button (click)="trougleZoonViewDivida({})">
+        ok
+      </ion-button>
+    </ion-grid>
+  </div>
+</div>
+
 <div id="telaPrimaria">
+
   <div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;">
     <h4>Limites de orçamento</h4>
   </div>
@@ -107,5 +156,55 @@
       </div>
     </form>
   </div>
+
+
+  
+  <div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;margin-top: 45px;">
+    <h4>Dividas fixa</h4>
+  </div>
+  
+  <div class="containerAcoes">
+    <div style="text-align: left;width: 100%;">
+      <small style="color: green;">Adicionar Divida fixa +</small> 
+    </div>
+    <div class="cardDividaFixas" *ngFor="let item of dividasFixas">
+      <div class="infoDivida">
+        <table style="width: 100%;">
+          <tr style="text-align: center;">
+            <td class="tituloCardGastos" >Data</td>
+            <td class="tituloCardGastos" >O'que</td>
+            <td class="tituloCardGastos" >Onde</td>
+            <td class="tituloCardGastos" >Quanto</td>
+            <td class="tituloCardGastos" >Como</td>
+          </tr>
+          <tr style="color: black;">
+            <td style="padding: 5px;">
+              <small>{{item.dadosDia}}/{{item.mes}}/{{item.ano}}</small>
+            </td>
+            <td style="padding: 5px;">{{(item.oque).substr(0,3)}}<span *ngIf="(item.oque).length >= 4">...</span></td>
+            <td style="padding: 5px;">{{(item.onde).substr(0,3)}}<span *ngIf="(item.onde).length >= 4">...</span></td>
+            <td style="padding: 5px;">{{item.quanto | currency:'BRL':true}}</td>
+            <td style="padding: 5px;">{{(item.como).substr(0,3)}}<span *ngIf="(item.como).length >= 4">...</span></td>
+          </tr>
+        </table>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="secondary" size="small" (click)="trougleZoonViewDivida(item)">Ver</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="light" size="small">Edit</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  color="danger" size="small">Del</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+      
+     
+  </div>
+
  
 </div>

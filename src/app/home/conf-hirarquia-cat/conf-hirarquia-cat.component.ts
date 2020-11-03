@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { UserService } from '../../shared/user.service';
+import { DividaService }from '../../shared/divida.service';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { UserService } from '../../shared/user.service';
 })
 export class ConfHirarquiaCatComponent implements OnInit {
   public loadingSalvaDados:boolean = false;
+  public itenDividaEmZooAtual:Object;
+  public mostrarDividaEmZoon:boolean = false;
   public dadosCat = new FormGroup({
     'alimentacao': new FormControl(null),
     'transporte': new FormControl(null),
@@ -19,12 +22,16 @@ export class ConfHirarquiaCatComponent implements OnInit {
     'beleza': new FormControl(null),
     'imprevistos': new FormControl(null)
   });
+  public dividasFixas:Array<object> = []
   constructor(
     public alertController: AlertController,
-    public user:UserService
+    public user:UserService,
+    public divida:DividaService
     ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pegaDividasFixas();
+  }
 
   public salvaHierarquiaCat():void{
     this.loadingSalvaDados=true;
@@ -69,5 +76,22 @@ export class ConfHirarquiaCatComponent implements OnInit {
     await alert.present();
   }
 
+  public pegaDividasFixas():void{
+    this.dividasFixas = [];
+    this.divida.pegaListaDeDividas(`dividas/${localStorage.getItem('UID')}/`)
+    .then(res=>{
+      for(let key in res){
+        if(res[key]['categoria'] === 'fixo'){
+          this.dividasFixas.push(res[key])
+        }
+      }
+    })
+    .catch(err=>{console.log(err)})
+  }
+
+  public trougleZoonViewDivida(item):void{
+    this.mostrarDividaEmZoon = this.mostrarDividaEmZoon === false?true:false;
+    this.itenDividaEmZooAtual = item;
+  }
 
 }
