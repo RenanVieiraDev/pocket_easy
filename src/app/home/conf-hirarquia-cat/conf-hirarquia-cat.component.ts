@@ -94,7 +94,9 @@ export class ConfHirarquiaCatComponent implements OnInit {
         }
       }
     })
-    .catch(err=>{console.log(err)})
+    .catch(err=>{
+      this.presentAlert('OPS!','erro.',err);
+    })
   }
 
   public trougleZoonViewDivida(item):void{
@@ -105,9 +107,6 @@ export class ConfHirarquiaCatComponent implements OnInit {
   public editDivida(item):void{
     this.mostrarDividaEmEdicao = this.mostrarDividaEmEdicao === false?true:false;
     this.itenDividaEmEdicao = item;
-    console.log(
-      this.itenDividaEmEdicao
-    )
   }
 
   public salvarModificacao():void{
