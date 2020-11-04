@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { UserService } from '../../shared/user.service';
 import { DividaService }from '../../shared/divida.service';
+import { ConfigService } from '../../shared/config.service';
 
 
 @Component({
@@ -14,6 +15,10 @@ export class ConfHirarquiaCatComponent implements OnInit {
   public loadingSalvaDados:boolean = false;
   public itenDividaEmZooAtual:Object;
   public mostrarDividaEmZoon:boolean = false;
+  public itenDividaEmEdicao:Object;
+  public mostrarDividaEmEdicao:boolean = false;
+  public dataETotalDias:object;
+  public loadingEdicaoDivida:boolean = false;
   public dadosCat = new FormGroup({
     'alimentacao': new FormControl(null),
     'transporte': new FormControl(null),
@@ -26,11 +31,13 @@ export class ConfHirarquiaCatComponent implements OnInit {
   constructor(
     public alertController: AlertController,
     public user:UserService,
-    public divida:DividaService
+    public divida:DividaService,
+    public conf:ConfigService
     ) { }
 
   ngOnInit() {
     this.pegaDividasFixas();
+    this.dataETotalDias = this.conf.pegaDataAtual();
   }
 
   public salvaHierarquiaCat():void{
@@ -82,6 +89,7 @@ export class ConfHirarquiaCatComponent implements OnInit {
     .then(res=>{
       for(let key in res){
         if(res[key]['categoria'] === 'fixo'){
+          res[key].uidDivida = key;
           this.dividasFixas.push(res[key])
         }
       }
@@ -92,6 +100,62 @@ export class ConfHirarquiaCatComponent implements OnInit {
   public trougleZoonViewDivida(item):void{
     this.mostrarDividaEmZoon = this.mostrarDividaEmZoon === false?true:false;
     this.itenDividaEmZooAtual = item;
+  }
+
+  public editDivida(item):void{
+    this.mostrarDividaEmEdicao = this.mostrarDividaEmEdicao === false?true:false;
+    this.itenDividaEmEdicao = item;
+    console.log(
+      this.itenDividaEmEdicao
+    )
+  }
+
+  public salvarModificacao():void{
+    this.loadingEdicaoDivida = true;
+    this.montaOsDadosNovosParaEditar();
+  }
+
+  public montaOsDadosNovosParaEditar():void{
+   const oqueInput = document.querySelector('#oque')['value'];
+   const ondeInput = document.querySelector('#onde')['value'];
+   const quantoInput = document.querySelector('#quanto')['value'];
+   const comoInput = document.querySelector('#como')['value'];
+   const diaInput = document.querySelector('#dia')['value'];
+   const mesInput = document.querySelector('#mes')['value'];
+   const anoInput = document.querySelector('#ano')['value'];
+   let dadosModificacao = {
+     oque:oqueInput,
+     onde:ondeInput,
+     quanto:parseFloat(quantoInput),
+     como:comoInput,
+     dadosDia:diaInput,
+     mes:mesInput,
+     ano:anoInput,
+     categoria:this.itenDividaEmEdicao['categoria'],
+     uidUser:this.itenDividaEmEdicao['uidUser'],
+     uidDivida:this.itenDividaEmEdicao['uidDivida']
+    }
+    this.divida.testaDados(dadosModificacao)
+    .then(res=>{
+      this.salvaAlteraçõesEmDividasFixas(dadosModificacao);
+    })
+    .catch(err=>{
+      this.loadingEdicaoDivida = false;
+      this.presentAlert('OPS!','erro.',err);
+    })
+  }
+
+  public salvaAlteraçõesEmDividasFixas(dados):void{
+    this.divida.alteraDadosDespesa(dados,dados['uidDivida'])
+    .then(res=>{
+      this.loadingEdicaoDivida = false;
+      this.editDivida({});
+      this.pegaDividasFixas();
+    })
+    .catch(err=>{
+      this.loadingEdicaoDivida = false;
+      this.presentAlert('OPS!','erro.',err);
+    })
   }
 
 }

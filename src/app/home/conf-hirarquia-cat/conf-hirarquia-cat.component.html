@@ -46,6 +46,36 @@
   </div>
 </div>
 
+<div id="editarDividaContainer" *ngIf="mostrarDividaEmEdicao">
+  <div id="cardDividaEdit">
+    <h3 style="color: #ffff;">Edite seu boleto</h3>
+      <input class="inptEditDivida" type="text" placeholder="oque?" id="oque" [value]="itenDividaEmEdicao['oque']">
+      <input class="inptEditDivida" type="text" placeholder="onde?" id="onde" [value]="itenDividaEmEdicao['onde']">
+      <input class="inptEditDivida" type="number" placeholder="quanto?" id="quanto" [value]="itenDividaEmEdicao['quanto']">
+      <input class="inptEditDivida" type="text" placeholder="como?" id="como" [value]="itenDividaEmEdicao['como']">
+     
+      <div style="margin: 10px;">
+        <label>Data:</label>
+        <select style="margin: 3px;" id="dia">
+          <option selected style="color: blue;">{{itenDividaEmEdicao['dadosDia']}}</option>
+          <option *ngFor="let dia of dataETotalDias['dias']">{{dia}}</option>
+        </select>
+        <select style="margin: 3px;" disabled id="mes">
+          <option>{{itenDividaEmEdicao['mes']}}</option>
+        </select>
+        <select style="margin: 3px;" disabled id="ano">
+          <option>{{itenDividaEmEdicao['ano']}}</option>
+        </select>
+      </div>
+
+      <div style="width: 100%;">
+        <img src="../../../assets/Blocks-1s-200px.svg" *ngIf="loadingEdicaoDivida" style="width: 90px;">
+        <ion-button color="danger" (click)="editDivida({})" *ngIf="loadingEdicaoDivida === false">Cancelar</ion-button>
+        <ion-button color="success" (click)="salvarModificacao()" *ngIf="loadingEdicaoDivida === false">Salvar</ion-button>
+      </div>
+  </div>
+</div>
+
 <div id="telaPrimaria">
 
   <div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;">
@@ -194,7 +224,7 @@
             <ion-button color="secondary" size="small" (click)="trougleZoonViewDivida(item)">Ver</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button color="light" size="small">Edit</ion-button>
+            <ion-button color="light" size="small" (click)="editDivida(item)">Edit</ion-button>
           </ion-col>
           <ion-col>
             <ion-button  color="danger" size="small">Del</ion-button>

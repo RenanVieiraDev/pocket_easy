@@ -65,3 +65,32 @@
     margin-left: auto;
    margin-right: auto;
 }
+
+#editarDividaContainer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1100;
+    padding-top: 100px;
+}
+#cardDividaEdit{
+    background-color: rgba(122,176,221,.6);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.2);
+    width: 90%;
+    padding: 7px;
+    margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+}
+.inptEditDivida{
+    margin: 5px;
+    width: 90%;
+    padding: 5px;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    box-shadow:1px 1px 1px rgba(0,0,0,.1);
+}
