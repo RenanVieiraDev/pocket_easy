@@ -107,6 +107,14 @@ export class DividaService {
     });
   }
 
+  public alteraDadosDespesa(dadosDivida,uidDivida):Promise<any>{
+    return new Promise<any>((resolve,reject)=>{
+      this.crud.atualizaValorNoDb(`dividas/${dadosDivida.uidUser}/${uidDivida}`,dadosDivida)
+      .then(res=>{resolve(res)})
+      .catch(err=>{reject(err)})
+    });
+  }
+
   public pegaListaDeDividas(path):Promise<any>{
     return new Promise<any>((resolve,reject)=>{
       this.crud.pegaValorNoDb(path).then(res=>{
