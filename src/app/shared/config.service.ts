@@ -9,6 +9,10 @@ export class ConfigService {
   public menuAtivo = new EventEmitter();
   public onOff = new EventEmitter();
   public appAutorizedInitTutorial = new EventEmitter();
+  public ano;
+  public mes;
+  public dias;
+
 
   constructor(public crud:CrudService) { }
 
@@ -34,5 +38,27 @@ export class ConfigService {
   public sistemaOnOff(valor:string):void{this.onOff.emit(valor);}
   public autorizacaoInitAppTotor():void{this.appAutorizedInitTutorial.emit(true)}
   public verificaDispositivoComConexaoAbertaInternet():boolean{return navigator.onLine;}
+
+  public pegaDataAtual():Object{
+    this.ano = new Date().getFullYear();
+    const mesFormat = (new Date().getMonth() + 1) < 10? '0'+(new Date().getMonth() + 1):(new Date().getMonth() + 1);
+    this.mes = mesFormat;
+    this.dias = this.retornaTotalDiasDoMes();
+    return {
+      ano:this.ano,
+      mes:this.mes,
+      dias:this.dias
+    }
+  }
+
+  public retornaTotalDiasDoMes():Array<number>{
+      var data = new Date(this.ano, this.mes, 0);
+      let dias = []
+      const totalDiasNumber = data.getDate();
+      for(let x =1; x <= totalDiasNumber;x++){
+        dias.push(x);
+      }
+       return dias;
+  }
 
 }
