@@ -103,8 +103,8 @@ export class TutorialConfComponent implements OnInit {
     this.loadingSalvaDados = true;
     let testeValor = this.validaValorSalario(this.dadosSalario.value.salario);
     if(testeValor !== 'ok'){
-      console.log(testeValor);
-      this.loadingSalvaDados = true;
+      this.loadingSalvaDados = false;
+      this.presentAlert('OPS!','Erro.',testeValor);
     }else{
       this.confApp.salvarSalario(`salario/${localStorage.getItem('UID')}/`,this.dadosSalario.value.salario)
       .then(res=>{
@@ -114,8 +114,8 @@ export class TutorialConfComponent implements OnInit {
         this.mudaTela(3)
       })
       .catch(err=>{
-        this.loadingSalvaDados = true;
-        console.log(err)
+        this.loadingSalvaDados = false;
+        this.presentAlert('OPS!','Erro.',err);
       })
     }
   }
