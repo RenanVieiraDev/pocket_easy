@@ -76,6 +76,56 @@
   </div>
 </div>
 
+
+<div id="adicionarDividaContainer" *ngIf="trougleCardAddDivida">
+  <div id="cardDividaAdd">
+    <h3 style="color: #ffff;">Adicionar Boleto</h3>
+
+    <form [formGroup]="dadosDivida" (submit)="salvarDivida()">
+
+      <ion-item>
+        <label>Data da compra:</label>
+        <select formControlName="dadosDia" class="inputSelectData">
+          <option *ngFor="let dia of dias" value="{{dia}}">{{dia}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="mes">{{mes}}</option>
+        </select>
+        <select class="inputSelectData" disabled>
+          <option [value]="ano">{{ano}}</option>
+        </select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">O'que ?</ion-label>
+        <ion-input formControlName="oque" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Onde ?</ion-label>
+        <ion-input formControlName="onde" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Quanto ? R$</ion-label>
+        <ion-input formControlName="quanto" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Como ?</ion-label>
+        <ion-input formControlName="como" ></ion-input>
+      </ion-item>
+      <div style="width: 100%;text-align: center;">
+        <img *ngIf="loadingSalvar" src="../../assets/Blocks-1s-200px.svg" style="width: 50px;">
+        <ion-button *ngIf="loadingSalvar === false" type="submit" color="success" size="small">Salvar</ion-button>
+      </div>
+    </form>
+
+      <div style="width: 100%;">
+        <img src="../../../assets/Blocks-1s-200px.svg" *ngIf="loadingAddDivida" style="width: 90px;">
+        <ion-button color="danger" (click)="trougleAddDivida()" *ngIf="loadingAddDivida === false">Cancelar</ion-button>
+        <ion-button color="success" (click)="salvaBoleto()" *ngIf="loadingAddDivida === false">Salvar</ion-button>
+      </div>
+  </div>
+</div>
+
 <div id="telaPrimaria">
 
   <div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;">
@@ -195,7 +245,7 @@
   
   <div class="containerAcoes">
     <div style="text-align: left;width: 100%;">
-      <small style="color: green;">Adicionar Divida fixa +</small> 
+      <small style="color: green;" (click)="trougleAddDivida()">Adicionar Divida fixa +</small> 
     </div>
     <div class="cardDividaFixas" *ngFor="let item of dividasFixas">
       <div class="infoDivida">
@@ -227,7 +277,7 @@
             <ion-button color="light" size="small" (click)="editDivida(item)">Edit</ion-button>
           </ion-col>
           <ion-col>
-            <ion-button  color="danger" size="small">Del</ion-button>
+            <ion-button  color="danger" size="small" (click)="deletarDivida(item)">Del</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

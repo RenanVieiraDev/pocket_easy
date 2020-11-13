@@ -12,6 +12,10 @@ import { ConfigService } from '../../shared/config.service';
   styleUrls: ['./conf-hirarquia-cat.component.scss'],
 })
 export class ConfHirarquiaCatComponent implements OnInit {
+  public ano;
+  public mes;
+  public dias;
+  public todosOsDiasDesseMes;
   public loadingSalvaDados:boolean = false;
   public itenDividaEmZooAtual:Object;
   public mostrarDividaEmZoon:boolean = false;
@@ -27,7 +31,18 @@ export class ConfHirarquiaCatComponent implements OnInit {
     'beleza': new FormControl(null),
     'imprevistos': new FormControl(null)
   });
+  public dadosDivida = new FormGroup({
+    'dadosDia':new FormControl(null),
+    'oque':new FormControl(null),
+    'onde':new FormControl(null),
+    'quanto':new FormControl(null),
+    'como':new FormControl(null),
+    'categoria':new FormControl(null),
+  })
   public dividasFixas:Array<object> = []
+  public trougleCardAddDivida:boolean = false;
+  public loadingAddDivida:boolean = false;
+
   constructor(
     public alertController: AlertController,
     public user:UserService,
@@ -36,8 +51,26 @@ export class ConfHirarquiaCatComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.pegaDataAtual();
     this.pegaDividasFixas();
     this.dataETotalDias = this.conf.pegaDataAtual();
+  }
+
+  public pegaDataAtual():void{
+    this.ano = new Date().getFullYear();
+    const mesFormat = (new Date().getMonth() + 1) < 10? '0'+(new Date().getMonth() + 1):(new Date().getMonth() + 1);
+    this.mes = mesFormat;
+    this.dias = this.retornaTotalDiasDoMes();
+  }
+
+  public retornaTotalDiasDoMes():Array<number>{
+      var data = new Date(this.ano, this.mes, 0);
+      let dias = []
+      const totalDiasNumber = data.getDate();
+      for(let x =1; x <= totalDiasNumber;x++){
+        dias.push(x);
+      }
+       return dias;
   }
 
   public salvaHierarquiaCat():void{
@@ -156,5 +189,42 @@ export class ConfHirarquiaCatComponent implements OnInit {
       this.presentAlert('OPS!','erro.',err);
     })
   }
+
+  public deletarDivida(item):void{
+    this.divida.apagaDivida('dividas',localStorage.getItem('UID'),item.uidDivida)
+    .then(res=>{console.log(res)})
+    .catch(err=>{console.log(err)})
+  }
+
+  public trougleAddDivida():void{
+    this.trougleCardAddDivida = this.trougleCardAddDivida === false?true:false;
+  }
+
+  public salvaBoleto(){
+    this.loadingAddDivida = true;
+    this.dadosDivida.value.mes = this.mes;
+    this.dadosDivida.value.ano = this.ano;
+    this.dadosDivida.value.categoria = 'fixo';
+    this.dadosDivida.value.uidUser = localStorage.getItem('UID');
+    this.divida.testaDados(this.dadosDivida.value)
+    .then(res=>{
+      this.divida.salvaDespesa(this.dadosDivida.value)
+      .then(res=>{
+        this.pegaDividasFixas();
+        this.loadingAddDivida = false;
+        this.trougleAddDivida();
+        this.dadosDivida.reset();
+      })
+      .catch(err=>{
+        this.loadingAddDivida = false;
+        this.presentAlert('OPS!','ERRO!',err);
+      })
+    })
+    .catch(err=>{
+      this.loadingAddDivida = false;
+      this.presentAlert('OPS!','ERRO!',err);
+    })
+  }
+  
 
 }
