@@ -80,12 +80,16 @@ export class DashuserComponent implements OnInit {
         valorTotal += this.categoriasValoresTotal[key]['valorTotal']
       }
     }
+    /*adiciona um modulo caso o valor do salario não estiver setado, vá ate o banco
+      e resgate o valor de lá e set o valor no localStorage como salario
+    */
     let restoDosalario = parseFloat(localStorage.getItem('salario'))-valorTotal
     this.categoriasMaximoValorGastoETotalGasto = [];
     for (let key in this.categoriasValoresTotal){
       if(this.categoriasValoresTotal[key]['categoria'] !== 'fixo'){
         let indiceCat = (this.categoriasValoresTotal[key]['categoria']).toLowerCase()
         let valorMaximoCatAtual = (restoDosalario * this.configPorcentoApp[indiceCat])/100;
+        //console.log(valorMaximoCatAtual);
         let porcentagemUtilizada = (this.categoriasValoresTotal[key]['valorTotal']/valorMaximoCatAtual)*100;
         let testeEdicaoInView = parseFloat(porcentagemUtilizada.toFixed(0));
         let porcentoParaView;

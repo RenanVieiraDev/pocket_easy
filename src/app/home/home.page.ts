@@ -112,6 +112,10 @@ export class HomePage implements OnInit {
     }
     await this.pegaDataAtual();
     await this.verificaDadosSalvosOfflineParaSalvarEmNuvem();
+    if(!localStorage.getItem('salario')){
+      const salarioSetStorage = await this.pegaValorSalario();
+      localStorage.setItem('salario',salarioSetStorage);
+    }
   }
 
   public salvarDivida():void{
