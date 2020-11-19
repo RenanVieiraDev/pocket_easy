@@ -191,9 +191,12 @@ export class ConfHirarquiaCatComponent implements OnInit {
   }
 
   public deletarDivida(item):void{
+    this.dividasFixas = [];
     this.divida.apagaDivida('dividas',localStorage.getItem('UID'),item.uidDivida)
-    .then(res=>{console.log(res)})
-    .catch(err=>{console.log(err)})
+    .then(res=>{
+      this.pegaDividasFixas();
+    })
+    .catch(err=>{this.presentAlert('OPS!','ERRO!',err);})
   }
 
   public trougleAddDivida():void{
